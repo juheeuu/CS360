@@ -2,8 +2,8 @@
 // the information to access database
 module.exports = {
   host     : 'localhost',
-  user     : '< MySQL username >',
-  password : '< MySQL password >',
-  port     : < port >,
-  database : 'my_db'
+  user     : 'tester',
+  password : '1234',
+  port     : 3306,
+  database : 'Delivery',
 };
