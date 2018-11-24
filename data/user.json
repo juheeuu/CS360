@@ -1,0 +1,10 @@
+{
+    "aaa": {
+        "password": "first_pass",
+        "name": "abet"
+    },
+    "bbb":{
+        "password": "second_pass",
+        "name": "betty"
+    }
+}
