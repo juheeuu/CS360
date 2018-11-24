@@ -4,8 +4,7 @@
     <link rel = "stylesheet" type = "text/css" href = "css/style.css">
     <meta name = "viewport" contetn = "initial-scale=1.0, user-scalable=yes">
     <meta charset = "euc-kr">
-    <script src = "https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9d7BDC0wod1_b07oTSPjH_G1gpAuFYFU&callback=initMap"
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9d7BDC0wod1_b07oTSPjH_G1gpAuFYFU"
   type="text/javascript"></script>
     <script>
       function initialize() {
@@ -38,7 +37,7 @@
         var gdorm_Title = "여사";
         var marker_gdorm = new google.maps.Marker({
           position: gdorm_Latlng,
-          map: map,
+          // map: map,
           title: gdorm_Title
         });
 
@@ -48,7 +47,7 @@
         var taxi_Title = "택승";
         var marker_taxi = new google.maps.Marker({
           position: taxi_Latlng,
-          map: map,
+          // map: map,
           title: taxi_Title
         });
 
@@ -58,15 +57,19 @@
         var east_Title = "동측";
         var marker_east = new google.maps.Marker({
           position: east_Latlng,
-          map: map,
+          // map: map,
           title: east_Title
         });
 
         if(value == "두메") {
-          var delivery = new Array(marker_gdorm, marker_taxi, marker_east);
+          marker_taxi.setMap(map);
+          marker_east.setMap(map);
+          var delivery = new Array(marker_taxi, marker_east);
         } else if (value == "지코바") {
+          marker_gdorm.setMap(map);
           var delivery = new Array(marker_gdorm);
         } else if (value == "대학생 치킨") {
+          marker_east.setMap(map);
           var delivery = new Array(marker_east);
         }
         delivery.map(x => google.maps.event.addListener(x,'click', mark(map, x)));
@@ -101,7 +104,6 @@
       }
     </script>
   </head>
-  <!-- <body onload = "initialize()"> -->
   <body>
     <div class = "root">
       <div class = "content">
