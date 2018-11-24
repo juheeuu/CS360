@@ -2,7 +2,9 @@ body{
   background-color: black;
   color: black;
 }
-
+.restt{
+  color: #ffffff;
+}
 .root{
   display: flex;
   flex-direction: row;
