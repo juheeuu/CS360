@@ -114,7 +114,10 @@ select{
   margin-right: 10px;
 }
 
-select option:checked,
+select option:checked {
+  background: #59C2BC;
+  color: #fff;
+}
 select option:hover {
     background: #59C2BC;
     color: #fff;
