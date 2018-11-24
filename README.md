@@ -6,10 +6,6 @@
 npm install
 
 # run server
-npm start
+npm run dev:server
 
-#install nodemon
-npm install -g nodemon
-
-npm install -g browser-sync
 ```
