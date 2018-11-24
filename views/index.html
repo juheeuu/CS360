@@ -1,0 +1,93 @@
+<html>
+  <head>
+    <title>디비의 민족</title>
+    <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+    <meta name = "viewport" contetn = "initial-scale=1.0, user-scalable=yes">
+    <meta charset = "euc-kr">
+    <script src = "https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script>
+      function initialize() {
+        var N_X = 36.373765;
+        var N_Y = 127.358389;
+        var W_X = 36.370270;
+        var W_Y = 127.355714;
+        var E_X = 36.371117;
+        var E_Y = 127.366528;
+
+        var zoomLevel = 16;
+
+        var markerTitle = "카이스트";
+        var markerMaxWidth = 300;
+
+        var NString = '<div>' +
+          '<h2>카이스트 기숙사</h2>' +
+          '<p>북측 기숙사입니다</p>' +
+          '<a href = "https://kds.kaist.ac.kr" target = "_blank">https://kds.kaist.ac.kr</a>' +
+          '</div>';
+
+        var centerLatlng = new google.maps.LatLng(36.370465, 127.362162);
+        var myLatlng1 = new google.maps.LatLng(N_X, N_Y);
+        var myLatlng2 = new google.maps.LatLng(W_X, W_Y);
+        var myLatlng3 = new google.maps.LatLng(E_X, E_Y);
+
+        var mapOptions = {
+          zoom: zoomLevel,
+          center: centerLatlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById('map_view'), mapOptions);
+
+        var marker1 = new google.maps.Marker({
+          position: myLatlng1,
+          map: map,
+          title: markerTitle
+        });
+        var marker2 = new google.maps.Marker({
+          position: myLatlng2,
+          map: map,
+          title: markerTitle
+        });
+        var marker3 = new google.maps.Marker({
+          position: myLatlng3,
+          map: map,
+          title: markerTitle
+        });
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString,
+          maxWidth: markerMaxWidth
+        });
+
+        google.maps.event.addListener(marker1, 'click', function() {
+          infowindow.open(map, marker1);
+        });
+        google.maps.event.addListener(marker2, 'click', function() {
+          infowindow.open(map, marker2);
+        });
+        google.maps.event.addListener(marker3, 'click', function() {
+          infowindow.open(map, marker3);
+        });
+      }
+    </script>
+  </head>
+  <body onload = "initialize()">
+    <div class = "root">
+      <div class = "content">
+        <select name = "restaurants" size = '6' onchange = 'restaurants_selected()'>
+          <option value = "두메">두메</option>
+          <option value = "지코바">지코바</option>
+          <option value = "대학생 치킨">대학생 치킨</option>
+        </select>
+      </div>
+      <div id = "map_view"></div>
+    </div>
+  </body>
+</html>
+<script>
+  function restaurants_selected() {
+    var obj = document.getElementById('fruits');
+    var index = obj.selectedIndex;
+    var value = obj.options[index].value;
+    var text = obj.options[index].text;
+  }
+</script>
