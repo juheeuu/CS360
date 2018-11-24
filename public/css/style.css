@@ -59,7 +59,7 @@ select{
 
 select option:checked,
 select option:hover {
-    background: #ff00ff;
+    background: #59C2BC;
     color: #fff;
 }
 
