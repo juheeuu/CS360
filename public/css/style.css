@@ -2,8 +2,30 @@ body{
   background-color: #C6E5ED;
   color: black;
 }
-.restt{
+#restt{
   color: #ffffff;
+  text-align: center;
+  padding: 0 20px;
+  position: absolute;
+  top: 50%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+}
+input[type="radio"] {
+  -ms-transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+  transform: scale(1.5);
+  margin-top: -1px;
+  vertical-align: middle;
+}
+
+#restt .title2 {
+  font-size: 100px;
+}
+#restt p {
+  margin: 1em 0;
+  line-height: 1em;
+  font-size: 50px;
 }
 .root{
   display: flex;
@@ -12,9 +34,8 @@ body{
 
 .content{
   display: flex;
-  width: 30%;
+  width: 25%;
 }
-
 .topBar{
   width: 100%;
   color: white;
@@ -98,7 +119,6 @@ body{
   font-family: sans-serif;
   height: 50;
 }
-
 option{
   margin-top: 10px;
   margin-bottom: 10px;
@@ -106,7 +126,7 @@ option{
 
 select{
   width: 100%;
-  height: 100%;
+  height: 90%;
   padding-left: 10px;
   font-size: 30px;
   color: #000000;
@@ -124,11 +144,35 @@ select option:hover {
     background: #59C2BC;
     color: #fff;
 }
+.content2{
+  display: flex;
+  width: 75%;
+  height: 90%;
+  margin-right: 10px;
+}
 
+.layer {
+  display: none;
+  width: 30%;
+  height: 100%;
+  padding-left: 10px;
+  font-size: 30px;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #C6E5ED;
+  border-radius: 3px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.layer h1 {
+  text-align: center;
+}
+.layer p {
+  margin-top: 10px;
+  text-align: center;
+}
 
 #map_view{
-  display: flex;
-  width: 70%;
-  height: 100%;
-  margin-right: 10px;
+  width: 100%;
+  position: relative;
 }

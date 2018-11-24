@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "dev:server": "nodemon server.js"
+    "dev:server": "nodemon server.js",
+    "dev:client": "browser-sync start -w --port 3001 --proxy localhost:3000 --files . --reload-delay 100"
   },
   "repository": {
     "type": "git",
