@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <title>DB의 민족</title>
+    <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+    <meta name = "viewport" contetn = "initial-scale=1.0, user-scalable=yes">
+    <meta charset = "euc-kr">
+    <script src = "https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9d7BDC0wod1_b07oTSPjH_G1gpAuFYFU&callback=initMap"
+  type="text/javascript"></script>
+    <script>
+      function initialize() {
+        var obj = document.getElementById('restaurants');
+        var index = obj.selectedIndex;
+        var value = obj.options[index].value;
+        var text = obj.options[index].text;
+
+        var N_X = 36.373765;
+        var N_Y = 127.358389;
+        var W_X = 36.370270;
+        var W_Y = 127.355714;
+        var E_X = 36.371117;
+        var E_Y = 127.366528;
+
+        var markerTitle = "카이스트";
+
+        var centerLatlng = new google.maps.LatLng(36.370465, 127.362162);
+        var zoomLevel = 16;
+        var mapOptions = {
+          zoom: zoomLevel,
+          center: centerLatlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById('map_view'), mapOptions);
+
+        var gdorm_X = 36.373426;
+        var gdorm_Y = 127.356148;
+        var gdorm_Latlng = new google.maps.LatLng(gdorm_X, gdorm_Y);
+        var gdorm_Title = "여사";
+        var marker_gdorm = new google.maps.Marker({
+          position: gdorm_Latlng,
+          map: map,
+          title: gdorm_Title
+        });
+
+        var taxi_X = 36.372825;
+        var taxi_Y = 127.359592;
+        var taxi_Latlng = new google.maps.LatLng(taxi_X, taxi_Y);
+        var taxi_Title = "택승";
+        var marker_taxi = new google.maps.Marker({
+          position: taxi_Latlng,
+          map: map,
+          title: taxi_Title
+        });
+
+        var east_X = 36.370823;
+        var east_Y = 127.366475;
+        var east_Latlng = new google.maps.LatLng(east_X, east_Y);
+        var east_Title = "동측";
+        var marker_east = new google.maps.Marker({
+          position: east_Latlng,
+          map: map,
+          title: east_Title
+        });
+
+        if(value == "두메") {
+          var delivery = new Array(marker_gdorm, marker_taxi, marker_east);
+        } else if (value == "지코바") {
+          var delivery = new Array(marker_gdorm);
+        } else if (value == "대학생 치킨") {
+          var delivery = new Array(marker_east);
+        }
+        delivery.map(x => google.maps.event.addListener(x,'click', mark(map, x)));
+      }
+      function mark(map, marker) {
+        var markerMaxWidth = 300;
+        var cont = '<div>' + '<h2>기본</h2>' + '</div>';
+        if(marker.title == '여사') {
+          var cont = '<div>' +
+          '<h2>여사</h2>' +
+          '<p>여자 기숙사입니다</p>' +
+          '<a href = "https://kds.kaist.ac.kr" target = "_blank">https://kds.kaist.ac.kr</a>' +
+          '</div>';
+        } else if(marker.title == '택승') {
+          var cont = '<div>' +
+          '<h2>택승</h2>' +
+          '<p>택시 승강장입니다</p>' +
+          '<a href = "https://kds.kaist.ac.kr" target = "_blank">https://kds.kaist.ac.kr</a>' +
+          '</div>';
+        } else if(marker.title == '동측') {
+          var cont = '<div>' +
+          '<h2>동측</h2>' +
+          '<p>동측 기숙사입니다</p>' +
+          '<a href = "https://kds.kaist.ac.kr" target = "_blank">https://kds.kaist.ac.kr</a>' +
+          '</div>';
+        }
+        var infowindow = new google.maps.InfoWindow({
+          content: cont,
+          maxWidth: markerMaxWidth
+        });
+        infowindow.open(map, marker);
+      }
+    </script>
+  </head>
+  <body onload = "initialize()">
+    <div class="topBar">
+      <div class="title" > KAIST Delivery Services! </div>
+      <div class="login" > LogIn </div>
+    </div>      
+  <body>
+    <div class = "root">
+      <div class = "content">
+        <select id="restaurants" name = "restaurants" size = '6' onchange = 'initialize()'>
+          <option value = "두메">두메</option>
+          <option value = "지코바">지코바</option>
+          <option value = "대학생 치킨">대학생 치킨</option>
+          <option value = "맘스터치">맘스터치</option>
+        </select>
+      </div>
+      <div id = "map_view"></div>
+    </div>
+  </body>
+</html>
+<script>
+  function restaurants_selected() {
+    var obj = document.getElementById('restaurants');
+    var index = obj.selectedIndex;
+    var value = obj.options[index].value;
+    var text = obj.options[index].text;
+  }
+</script>
