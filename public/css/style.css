@@ -227,6 +227,7 @@ select option:hover {
   margin-bottom: 25px;
   color: rgba(255, 255, 255, 0.4);
   padding: 10px 20px;
+  margin-left: 3px;
 }
 .form .topbar .input::-webkit-input-placeholder {
   color: white;
@@ -261,6 +262,7 @@ select option:hover {
   -webkit-border-radius: 6px;
   border-radius: 6px;
   cursor: pointer;
+  margin-bottom: 5px;
 }
 .form .submit:focus {
   outline: none;
