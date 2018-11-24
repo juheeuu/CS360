@@ -6,6 +6,8 @@
 npm install
 
 # run server
-npm run dev:server
+## run two terminal
 
+npm run dev:server
+npm run dev:client
 ```
