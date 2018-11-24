@@ -1,10 +1,5 @@
 module.exports = function(app, fs, connection)
 {
-<<<<<<< HEAD
-  app.get('/', (req, res) =>{
-    res.end("Hi main page");
-  })
-
   app.get('/student_login', (req, res) =>{
     console.log("GET /login");
     const sess = req.session;
@@ -342,7 +337,8 @@ module.exports = function(app, fs, connection)
         });
       };
     });
-=======
+  });
+
   app.get('/',function(req,res){
     res.render('index.html')
   });
@@ -351,6 +347,5 @@ module.exports = function(app, fs, connection)
   });
   app.get('/restaurant', function(req,res){
     res.render('restaurant.html')
->>>>>>> 873b1f72023bf2db74d01cadb490b8b1b8caef8b
   });
 }

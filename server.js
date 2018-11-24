@@ -15,7 +15,6 @@ app.engine('html', require('ejs').renderFile);
 app.use(express.static('public'));
 
 const mysql = require('mysql');
-<<<<<<< HEAD
 const db_config = require('./config/database.js');
 var connection = mysql.createConnection(db_config);
 
@@ -23,15 +22,6 @@ connection.connect(function(err) {
   if (err) throw (err);
   else console.log("DB connected")
 });
-=======
-var dbconfig   = require('./config/database.js');
-
-// var connection = mysql.createConnection(dbconfig);
-
-// connection.connect(function(err) {
-//   if (err) throw (err);
-// });
->>>>>>> 873b1f72023bf2db74d01cadb490b8b1b8caef8b
 
 var router = require('./routes/index')(app, fs, connection)
 
