@@ -6,6 +6,7 @@
     <meta charset = "euc-kr">
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9d7BDC0wod1_b07oTSPjH_G1gpAuFYFU"
   type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script>
       function initialize() {
         var obj = document.getElementById('restaurants');
@@ -117,14 +118,33 @@
     </div>
     <div class = "root">
       <div class = "content">
-        <select id="restaurants" name = "restaurants" size = '6' onchange = 'initialize()'>
+        <select id = "restaurants" name = "restaurants" size = '6' onchange = 'initialize()'>
           <option value = "두메">두메</option>
           <option value = "지코바">지코바</option>
           <option value = "대학생 치킨">대학생 치킨</option>
           <option value = "맘스터치">맘스터치</option>
         </select>
       </div>
-      <div id = "map_view"></div>
+      <div class = "content2">
+        <div class = "layer">
+          <p>두메에요! <br /> 여기 맛있어요!</p>
+          <h1>메뉴</h1>
+          <p>밥! <br /> 매운밥!</p>
+        </div>
+        <div id = "map_view">
+        </div>
+      </div>
     </div>
+    <script>
+      jQuery('#restaurants').change(function() {
+        var state = jQuery('#restaurants option:selected').val();
+        if(state == '두메') {
+          jQuery('.layer').show();
+          console.log("ㅁㅁㅁㄴ러ㅏㅈㄷ렂다르");
+        } else {
+          jQuery('.layer').hide();
+        }
+      });
+    </script>
   </body>
 </html>
