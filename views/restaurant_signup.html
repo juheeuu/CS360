@@ -1,0 +1,109 @@
+<html>
+  <head>
+    <title>DB의 민족</title>
+    <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+    <meta name = "viewport" contetn = "initial-scale=1.0, user-scalable=yes">
+    <meta charset = "euc-kr">
+    <style>
+            table {
+                width: 80%;
+                margin: auto;
+                border:  1px solid rgba(255, 255, 255, 0.4);
+            }
+            div.buttonWrapper {
+                margin: auto;
+            }
+            .deliveryLocationTextStyle {
+                margin: auto;
+            }
+            table.blueTable {
+                border: 1px solid #1C6EA4;
+                background-color: #EEEEEE;
+                border-collapse: collapse;
+                text-align: center;
+            }
+            table.blueTable td, table.blueTable th {
+                border: 1px solid #AAAAAA;
+                padding: 3px 2px;
+            }
+            .classify{
+                font-weight: bold;
+                font-size: 15px;
+                background-color: #59C2BC;
+            }
+        </style>
+  </head>
+<body style="margin: 0;">
+    <div class="topBar">
+        <div class="title" >Restaurant-Sign Up </div>
+      </div>
+      <table class="blueTable"> 
+          <tr>
+              <td class="classify"> ID </td>
+              <td> <input> </td>
+          </tr>
+          <tr>
+                <td class="classify"> Name </td>
+                <td> <input> </td>
+        </tr>
+          <tr>
+            <td class="classify"> Password </td>
+            <td> <input> </td>
+          </tr>
+          <tr>
+            <td class="classify"> PhoneNumber </td>
+            <td> <input> </td>
+          </tr>
+          <tr>
+                <td class="classify"> Location </td>
+                <td> <input> </td>
+              </tr>
+          
+          <tr>
+              <td class="classify"> Category </td>
+              <td> <select>
+                      <option value="hamburger">hamburger</option>
+                      <option value="chicken">chicken</option>
+                      <option value="meal">meal</option>
+                    </select>  </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="deliveryLocationTextStyle"> Delivery Location </td>
+          </tr>
+          <tr>
+              <td class="classify">
+                  Girls Dorm
+              </td>
+              <td>
+                  <input type="radio" name="girldorm" value="pos">  Possible
+                  <input type="radio" name="girldorm" value="neg">  Impossible
+              </td>
+          </tr>
+          <tr>
+                <td class="classify">
+                    Taxi Station
+                </td>
+                <td>
+                    <input type="radio" name="girldorm" value="pos">  Possible
+                    <input type="radio" name="girldorm" value="neg">  Impossible
+                </td>
+            </tr>
+            <tr>
+                <td class="classify">
+                    East entry
+                </td>
+                <td>
+                    <input type="radio" name="girldorm" value="pos"> Possible
+                    <input type="radio" name="girldorm" value="neg"> Impossible
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="buttonWrapper">
+                    <button class="button" id="signin_button" >submit</button>
+                    </div>
+                </td>
+            </tr>
+      </table>
+</body>
+</html>

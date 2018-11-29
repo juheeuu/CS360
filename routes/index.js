@@ -15,5 +15,8 @@ module.exports = function(app, fs, connection)
   app.get('/user_signup', function(req,res){
     res.render('user_signup.html')
   });
+  app.get('/restaurant_signup', function(req,res){
+    res.render('restaurant_signup.html')
+  });
 
 }
