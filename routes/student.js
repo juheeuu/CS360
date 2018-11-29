@@ -103,11 +103,11 @@ module.exports = function(app, fs, connection){
 
       // If result exist
       if(rows.length == 0){
-        res.send({"Success" : "False", "Message" : "No data"});
+        res.send({"Message" : "No data"});
         return;
       }else{
-        const ans = {"Success" : "True", "Data" : rows};
-        res.send(ans);
+        //const ans = {"Success" : "True", "Data" : rows};
+        res.send(rows);
         res.end();
         return;
       }
@@ -129,8 +129,8 @@ module.exports = function(app, fs, connection){
         res.send({"Success" : "False", "Message" : "No data"});
         return;
       }else{
-        const ans = {"Success" : "True", "Data" : rows};
-        res.send(ans);
+        //const ans = {"Success" : "True", "Data" : rows};
+        res.send(rows);
         res.end();
         return;
       }
@@ -152,8 +152,8 @@ module.exports = function(app, fs, connection){
         res.send({"Success" : "False", "Message" : "No data"});
         return;
       }else{
-        const ans = {"Success" : "True", "Data" : rows};
-        res.send(ans);
+        //const ans = {"Success" : "True", "Data" : rows};
+        res.send(rows);
         res.end();
         return;
       }
@@ -170,8 +170,8 @@ module.exports = function(app, fs, connection){
         res.end("DB error")
         return;
       }
-      const result = {"Success" : "True", "Data" : rows}
-      res.send(result);
+      //const result = {"Success" : "True", "Data" : rows}
+      res.send(rows);
     });
   });
 
@@ -194,7 +194,7 @@ module.exports = function(app, fs, connection){
         res.send({"Success" : "False", "Message" : "Duplicated data"});
         return;
       }else{
-        rows[0].Success = "True"
+        //rows[0].Success = "True"
         res.send(rows[0]);
         res.end();
         return;
@@ -219,8 +219,8 @@ module.exports = function(app, fs, connection){
         res.send({"Success" : "False", "Message" : "No data"});
         return;
       }else{
-        const ans = {"Success" : "True", "Data" : rows};
-        res.send(ans);
+        //const ans = {"Success" : "True", "Data" : rows};
+        res.send(rows);
         res.end();
         return;
       }
@@ -239,7 +239,8 @@ module.exports = function(app, fs, connection){
         return;
       }
 
-      const ans = {"Success" : "True", "Value" : rows[0]["AVG(EvaluationValue)"]}
+      //const ans = {"Success" : "True", "Value" : rows[0]["AVG(EvaluationValue)"]}
+      const ans = {"Value" : rows[0]["AVG(EvaluationValue)"]}
       res.send(ans);
     });
   });
@@ -268,7 +269,7 @@ module.exports = function(app, fs, connection){
       }else{
         const user = rows[0];
         const result = {};
-        result.Success = "True";
+        //result.Success = "True";
         result.category = user.prefermenu;
         res.send(result);
       };
@@ -292,8 +293,8 @@ module.exports = function(app, fs, connection){
         res.send({"Success" : "False", "Message" : "No restuarants"});
         return;
       }else{
-        const ans = {"Success" : "True", "Data" : rows};
-        res.send(ans);
+        //const ans = {"Success" : "True", "Data" : rows};
+        res.send(rows);
         res.end();
         return;
       }
@@ -329,7 +330,8 @@ module.exports = function(app, fs, connection){
 
       console.log(rows);
       if(rows.length == 1){
-        res.send({"Success" : "True", "Value" : rows[0]["Distancecol"]});
+        //res.send({"Success" : "True", "Value" : rows[0]["Distancecol"]});
+        res.send({"Value" : rows[0]["Distancecol"]});
       }else{
         res.send({"Success" : "False"});
       }

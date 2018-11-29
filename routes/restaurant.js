@@ -52,6 +52,7 @@ module.exports = function(app, fs, connection){
       }
 
       if(rows.length == 1){
+        sess.restaurant_id = id;
         res.send({"Success" : "True"});
         return;
       }else{
@@ -109,8 +110,8 @@ module.exports = function(app, fs, connection){
             sid_list.push(rows[i].Space_idSpace)
           }
           informs[0].places = sid_list;
-          const ans = {"Success" : "True", "Inform" : informs[0]};
-          res.send(ans);
+          //const ans = {"Success" : "True", "Inform" : informs[0]};
+          res.send(informs[0]);
         });
       };
     });
