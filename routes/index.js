@@ -422,5 +422,8 @@ module.exports = function(app, fs, connection)
   app.get('/restaurant', function(req,res){
     res.render('restaurant.html')
   });
+  app.get('/user_signup', function(req,res){
+    res.render('user_signup.html')
+  });
 
 }
