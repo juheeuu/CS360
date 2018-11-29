@@ -227,7 +227,7 @@ module.exports = function(app, fs, connection){
     });
   });
 
-
+  //aggregation
   app.get('/restaurant/avg_value', (req, res) =>{
     console.log("GET /restaurant/avg_value");
     const rid = req.query.rid;
@@ -313,4 +313,27 @@ module.exports = function(app, fs, connection){
       res.end({"Success" : "True"});
     });
   });
+
+
+  app.get('/distance', (req, res) =>{
+    console.log("GET /distance");
+    const s1 = req.query.s1;
+    const s2 = req.query.s2;
+
+    connection.query("SELECT Distancecol FROM Distance WHERE (Space_idSpace=? and Space_idSpace1=?) OR (Space_idSpace=? and Space_idSpace1=?)", [s1, s2, s2, s1], function(err, rows, fields){
+      if(err){
+        console.log(err);
+        res.end("DB error")
+        return;
+      }
+
+      console.log(rows);
+      if(rows.length == 1){
+        res.send({"Success" : "True", "Value" : rows[0]["Distancecol"]});
+      }else{
+        res.send({"Success" : "False"});
+      }
+    });
+  });
+
 }
