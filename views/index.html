@@ -12,18 +12,52 @@
           <div class="title" > KAIST Delivery Services! </div>
         </div>
     <img src="static/KAIST.jpeg" width="100%">
-    <div class="form">
-      <div class="forceColor"></div>
-      <div class="topbar">
-        <div class="spanColor"></div>
-        <button class="submit" id="submit" >Student</button>
-      </div>
-      <a href="/restaurant">
-      <button
-        class="submit" 
-        id="submit"
-      > Restaurant</button>
-    </a>
+      <div class="form">
+        <div class="forceColor"></div>
+        <div class="topbar">
+          <div class="spanColor"></div>
+          <input class="input" id="id_input" name="id_input" placeholder="ID"/>
+          <input type="password" class="input" id="pwd_input" name="pwd_input" placeholder="Password"/>
+        </div>
+        <div class="topbar">
+            <div class="spanColor"></div>
+            <button class="input" id="active_student" onclick="active_student();" > Student </button>
+            <button class="input" id="active_restaurant" onclick="active_restaurant();" > Restaurant </button>
+        </div>
+        <button class="submit" id="Login_button" onclick="login();">Login</button>
+        <button class="submit" id="Signup_button" >Sign up</button>
+
     </div>
+    <script type="text/javascript">
+      let active = 0;
+
+      const active_student = function(){
+        console.log("active_student")
+        active = 1;
+      }
+      const active_restaurant = function(){
+        console.log("restaurant_student")
+        active = 2;
+      }
+
+      const login = async () => {
+        console.log("Call login");
+        const id = document.getElementById("id_input").value;
+        const pwd = document.getElementById("pwd_input").value;
+
+        let side = ""
+        if(active == 0){
+          console.log("didn't select the side");
+        }else if(active == 1){
+          side = "student"
+        }else if(active == 2){
+          side = "restaurant"
+        }
+
+        const response = await fetch('/' + side + '_login?id=' + id + "&password=" + pwd);
+        const myjson = await response.json();
+        console.log(myjson);
+      }
+    </script>
   </body>
 </html>

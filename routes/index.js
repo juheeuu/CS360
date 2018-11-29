@@ -39,6 +39,8 @@ module.exports = function(app, fs, connection)
     const sess = req.session;
     const id = req.query.id;
     const password = req.query.password;
+    console.log(id);
+    console.log(password);
 
     connection.query("SELECT * FROM Student WHERE idStudent=?", [id], function(err, rows, fields){
       if(err){
