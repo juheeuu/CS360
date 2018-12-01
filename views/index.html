@@ -27,7 +27,7 @@
           <input type="password" class="input" id="pwd_input" name="pwd_input" placeholder="Password"/>
         </div>
         <button class="submit" id="Login_button" onclick="login();">Login</button>
-        <a href="user_signup"><button class="submit" id="Signup_button" >Sign up</button></a>
+        <button class="submit" id="Signup_button" onclick="signup();" >Sign up</button>
 
     </div>
     <script type="text/javascript">
@@ -75,6 +75,13 @@
         }else{
           alert("로그인에 실패하였습니다");
         }
+      }
+      const signup = function() {
+        (active === 1)
+          ? location.href="/user_signup"
+          : (active === 2)
+            ? location.href="/restaurant_signup"
+            : alert("Please choose your status!");
       }
     </script>
   </body>
