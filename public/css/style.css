@@ -56,9 +56,10 @@ input[type="radio"] {
   text-align: left;
   display: inline-block;
   line-height: 70px;
-  flex: 8;
+  flex: 1;
   margin-left: 10px;
   font-weight: bold;
+  text-align: center;
 }
 .button {
   border: 1px solid #f7fcff;

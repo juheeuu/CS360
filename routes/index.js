@@ -18,5 +18,7 @@ module.exports = function(app, fs, connection)
   app.get('/restaurant_signup', function(req,res){
     res.render('restaurant_signup.html')
   });
-
+  app.get('/rating', function(req,res){
+    res.render('rating.html')
+  });
 }
