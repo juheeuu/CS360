@@ -4,8 +4,7 @@
     <link rel = "stylesheet" type = "text/css" href = "css/style.css">
     <meta name = "viewport" contetn = "initial-scale=1.0, user-scalable=yes">
     <meta charset = "euc-kr">
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9d7BDC0wod1_b07oTSPjH_G1gpAuFYFU"
-  type="text/javascript"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9d7BDC0wod1_b07oTSPjH_G1gpAuFYFU" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
@@ -88,28 +87,6 @@
         var markerTitle = "카이스트";
 
         var map = call_map()
-        // marker_gdorm = mgdorm(map);
-        // marker_taxi = mtaxi(map);
-        // marker_east = meast(map);
-        // show_marker(marker_taxi, map);
-
-//        if(value == "두메") {
-//          marker_taxi.setMap(map);
-//          marker_east.setMap(map);
-//          var delivery = new Array(marker_taxi, marker_east);
-//        } else if (value == "지코바") {
-//          marker_gdorm.setMap(map);
-//          var delivery = new Array(marker_gdorm);
-//        } else if (value == "대학생 치킨") {
-//          marker_east.setMap(map);
-//          var delivery = new Array(marker_east);
-//        } else if (value == "맘스터치") {
-//          marker_gdorm.setMap(map);
-//          marker_taxi.setMap(map);
-//          marker_east.setMap(map);
-//          var delivery = new Array(marker_gdorm, marker_taxi, marker_east);
-//        }
-//        delivery.map(x => google.maps.event.addListener(x,'click', mark(map, x)));
       }
       function mark(map, marker) {
         var markerMaxWidth = 300;
@@ -145,26 +122,46 @@
         });
         infowindow.open(map, marker);
       }
-    </script>
-    <script>
-        $(document).ready(function() {
-          jQuery.ajax({
-            type:"GET",
-            url:"delivery/space?sid=1",
-            dataType:"JSON",
-            success: function(data){
-              // alert("What");
-              // alert(data.Data[0]["Space_idSpace"]);
-            },
-            complete: function(data){
+      function menu(state) {
+        jQuery.ajax({
+          type:"GET",
+          url:"/restaurant/menu?rid="+state,
+          dataType:"JSON",
+          success: function(data){
+            var i = 0;
+            $.each(data, function() {
+              // console.log(data);
+              // console.log(data[i]);
+              var menu_name = data[i].menu_name;
+              var price = data[i].price;
+              console.log(data.length);
+              tableCreate(menu_name, price, i);
+              jQuery('.layer').show();
+              i = i + 1;
+            })
+          },
+          complete: function(data){
+          },
+          error: function(data){
+            jQuery('.layer').hide();
+            alert("calling menu has " + status);
+          },
+        })
+      }
+      function tableCreate(menu_name, price, size) {
+        var table = document.getElementById("myTable");
+        var row = table.insertRow(size);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
 
-            },
-            error: function(xhr, status, error){
-              // alert("sid 다시 찾아봐라잉");
-            }
-          });
-        });
-      </script>
+        cell1.innerHTML = menu_name;
+        cell2.innerHTML = price;
+      }
+      function removeTable() {
+        var Table = document.getElementById("myTable");
+        Table.innerHTML = "";
+      }
+    </script>
   </head>
   <body style="margin:0;">
     <div class="topBar">
@@ -173,33 +170,13 @@
     </div>
     <div class = "root">
       <div class = "content">
-        <select class = "form-control" id = "restaurants" size = "20" name = "restaurants" onchange = 'initialize()' data-source = "http://localhost:3001/restaurant/all" data-valueKey = "idRestaruant" data-displayKey = "name">
+        <select class = "form-control" id = "restaurants" size = "20" name = "restaurants" onchange = 'initialize()'>
         </select>
       </div>
       <div class = "content2">
         <div class = "layer">
           <p>두메숯불 바베큐</p>
-          <table>
-            <thead>
-              <tr>
-                <th> </th><th>메뉴</th><th> </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>양념<br/>삼겹살</td><td> </td><td>14,000</td>
-              </tr>
-              <tr>
-                <td>소금<br/>삼겹살</td><td> </td><td>14,000</td>
-              </tr>
-              <tr>
-                <td>양념<br/>닭구이</td><td> </td><td>14,000</td>
-              </tr>
-              <tr>
-                <td>소금<br/>닭구이</td><td> </td><td>14,000</td>
-              </tr>
-            </tbody>
-          </table>
+          <table id="myTable" cellpadding="2" cellspacing="2" onclick="tester()"></table>
           <div class = "linking">
             <a href="" class="button2" target="_blank">평가보기</a>
           </div>
@@ -210,11 +187,11 @@
     </div>
     <script>
       jQuery('#restaurants').change(function() {
-        var state = jQuery('#restaurants option:selected').val();
+        var rid = jQuery('#restaurants option:selected').val();
         // console.log(state);
         jQuery.ajax({
           type:"GET",
-          url:"/delivery/restaurant?rid="+state,
+          url:"/delivery/restaurant?rid="+rid,
           dataType:"JSON",
           success: function(data){
             // console.log(data);
@@ -240,6 +217,8 @@
               i = i + 1;
             })
             //console.log(restext);
+            removeTable();
+            menu(rid);
           },
           complete: function(data){
 
@@ -248,14 +227,7 @@
             alert("calling spaces has " + status);
           },
         })
-        if(state == '두메') {
-          jQuery('.layer').show();
-        } else {
-          jQuery('.layer').hide();
-        }
       });
-    </script>
-    <script>
       $(document).ready(function() {
         var $select = $('#restaurants');
         jQuery.ajax({
