@@ -100,8 +100,7 @@ module.exports = function(app, fs, connection){
   app.get('/rating', (req, res) =>{
     console.log("GET /rating");
     const rid = req.query.rid;
-    //connection.query("SELECT * FROM Evlauation WHERE Restaruant_idRestaruant=?", [rid], function(err, rows, fields){
-    connection.query("SELECT Student_idStudent,EvaluationData,EvaluationValue FROM (Evlauation JOIN Restaruant) WHERE idRestaruant=?", [rid], function(err, rows, fields){
+    connection.query("SELECT stuId,Description,score FROM (Rating JOIN Restaruant) WHERE idRestaruant=?", [rid], function(err, rows, fields){
       if(err){
         console.log(err);
         res.end("DB error")
@@ -125,8 +124,7 @@ module.exports = function(app, fs, connection){
   app.get('/rating/avg_value', (req, res) =>{
     console.log("GET /rating/avg_value");
     const rid = req.query.rid;
-    //connection.query("SELECT * FROM Evlauation WHERE Restaruant_idRestaruant=?", [rid], function(err, rows, fields){
-    connection.query("SELECT AVG(EvaluationValue) FROM Evlauation WHERE Restaruant_idRestaruant=?", [rid], function(err, rows, fields){
+    connection.query("SELECT AVG(score) FROM Rating WHERE resId=?", [rid], function(err, rows, fields){
       if(err){
         console.log(err);
         res.end("DB error")
@@ -134,7 +132,7 @@ module.exports = function(app, fs, connection){
       }
 
       //const ans = {"Success" : "True", "Value" : rows[0]["AVG(EvaluationValue)"]}
-      const ans = {"Value" : rows[0]["AVG(EvaluationValue)"]}
+      const ans = {"Value" : rows[0]["AVG(score)"]}
       res.send(ans);
     });
   });
