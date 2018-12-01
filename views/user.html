@@ -138,10 +138,6 @@
     <div class = "root">
       <div class = "content">
         <select class = "form-control" id = "restaurants" size = "20" name = "restaurants" onchange = 'initialize()' data-source = "http://localhost:3001/restaurant/all" data-valueKey = "idRestaruant" data-displayKey = "name">
-          <option>두메</option>
-          <option>지코바</option>
-          <option>대학생 치킨</option>
-          <option>맘스터치</option>
         </select>
       </div>
       <div class = "content2">
@@ -200,9 +196,13 @@
             // alert(data.Data[0]["Space_idSpace"]);
           },
           complete: function(data){
-            console.log(data.name);
-            $.each(data, function(i, val){
-              $select.append($('<option />', { name: data.Data, text: val[i+1] }));
+            var restext = JSON.parse(data.responseText);
+            var i = 0;
+            $.each(restext, function() {
+              console.log(restext);
+              console.log(restext[i].name);
+              $select.append($('<option />', { text: restext[i].name }));
+              i = i + 1;
             });
           },
           error: function(xhr, status, error){
