@@ -7,9 +7,8 @@ module.exports = function(app, fs, connection){
     const category = req.body["category"];
     const phoneNumber = req.body["PhoneNumber"];
     const location = req.body["location"];
-    const menu = req.body["Menu"];
 
-    const values = [id, name, category, phoneNumber, location, menu, password];
+    const values = [id, name, category, phoneNumber, location, password];
 
     //console.log(typeof space)
 
@@ -25,7 +24,7 @@ module.exports = function(app, fs, connection){
         return;
       }else{
         //INSERT INTO `Delivery`.`Student` (`idStudent`, `Password`, `prefermenu`) VALUES ('1', '1234', '2');
-        connection.query("INSERT INTO Restaruant (idRestaruant, name, category, PhoneNumber, location, Menu, password) VALUES (?, ?, ?, ?, ?, ?, ?)", values, function(err, rows, fields){
+        connection.query("INSERT INTO Restaruant (idRestaruant, name, category, PhoneNumber, location, password) VALUES (?, ?, ?, ?, ?, ?)", values, function(err, rows, fields){
           if(err){
             console.log(err);
             res.end("DB error_INSERT")
