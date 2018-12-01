@@ -161,31 +161,29 @@ module.exports = function(app, fs, connection){
         res.end("DB error")
         return;
       }
-      res.end({"Success" : "True"});
+      res.send({"Success" : "True"});
     });
   });
 
+  app.post('/rating/edit', (req, res) =>{
+    console.log("POST /rating/edit");
+    //const id = req.session.user_id;
+    const id = "2";
+    const rid = req.query.rid;
 
-  app.get('/distance', (req, res) =>{
-    console.log("GET /distance");
-    const s1 = req.query.s1;
-    const s2 = req.query.s2;
+    const score = req.body.score;
+    const content = req.body.Description;
 
-    connection.query("SELECT Distancecol FROM Distance WHERE (Space_idSpace=? and Space_idSpace1=?) OR (Space_idSpace=? and Space_idSpace1=?)", [s1, s2, s2, s1], function(err, rows, fields){
+    const ans = [id, rid, content, score];
+    connection.query("INSERT INTO Rating (stuId, resId, Description, score) VALUES (?, ?, ?, ?)", ans, function(err, rows, fields){
       if(err){
         console.log(err);
         res.end("DB error")
         return;
       }
-
-      console.log(rows);
-      if(rows.length == 1){
-        //res.send({"Success" : "True", "Value" : rows[0]["Distancecol"]});
-        res.send({"Value" : rows[0]["Distancecol"]});
-      }else{
-        res.send({"Success" : "False"});
-      }
+      res.send({"Success" : "True"});
     });
   });
+
 
 }
