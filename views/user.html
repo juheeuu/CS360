@@ -164,10 +164,30 @@
             }
           });
         });
-      </script>
+    </script>
+    <script>
+      function onclickToggleButton(buttonNum) {
+        var toggle1 = document.getElementById('toggle1');
+        var toggle2 = document.getElementById('toggle2')
+        if (buttonNum==1) {
+            toggle1.style.background="-webkit-linear-gradient(top, #65a9d7, #59C2BC)";
+            toggle2.style.background="grey";
+        } else if (buttonNum == 2) {
+          toggle2.style.background="-webkit-linear-gradient(top, #65a9d7, #59C2BC)";
+          toggle1.style.background="grey";
+        }
+      }
+    </script>
+    <style>
+      .toggleButton2 {
+        background: grey;
+      }
+    </style>
   </head>
   <body style="margin:0;">
     <div class="topBar">
+      <button id= "toggle1" class="button" onclick="onclickToggleButton(1)" > All Menus </button>
+      <button id="toggle2" class="initialDisabledButton" onclick="onclickToggleButton(2)" > Prefer Menu </button>
       <div class="title" > KAIST Delivery Services! </div>
       <button class="button" > Logout </button>
     </div>
