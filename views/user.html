@@ -166,8 +166,10 @@
         var Table = document.getElementById("myTable");
         Table.innerHTML = "";
       }
-    </script>
-    <script>
+      function see_rating() {
+        var a = document.getElementById('see_rating');
+        a.href = "/rating?rid="+rid;
+      }
       function onclickToggleButton(buttonNum) {
         var toggle1 = document.getElementById('toggle1');
         var toggle2 = document.getElementById('toggle2')
@@ -203,7 +205,7 @@
           <p id = "res_menu">메뉴</p>
           <table id="myTable" cellpadding="2" cellspacing="2" onclick="tester()"></table>
           <div class = "linking">
-            <a href="/restaurant/comments?rid=1" class="button2" target="_blank">평가보기</a>
+            <a href="javascript:see_rating();" id = "see_rating" class="button2" target="_blank">평가보기</a>
           </div>
         </div>
         <div id = "map_view">
@@ -211,8 +213,9 @@
       </div>
     </div>
     <script>
+      var rid = 0;
       jQuery('#restaurants').change(function() {
-        var rid = jQuery('#restaurants option:selected').val();
+        rid = jQuery('#restaurants option:selected').val();
         // console.log(state);
         jQuery.ajax({
           type:"GET",
