@@ -79,7 +79,7 @@
 
         var N_X = 36.373765;
         var N_Y = 127.358389;
-        var W_X = 36.370270; 
+        var W_X = 36.370270;
         var W_Y = 127.355714;
         var E_X = 36.371117;
         var E_Y = 127.366528;
@@ -138,7 +138,6 @@
                 // console.log(data[i]);
                 var menu_name = data[i].menu_name;
                 var price = data[i].price;
-                console.log(data.length);
                 tableCreate(menu_name, price, i);
                 jQuery('.layer').show();
                 i = i + 1;
@@ -168,7 +167,7 @@
       }
       function see_rating() {
         var a = document.getElementById('see_rating');
-        a.href = "/rating?rid="+rid;
+        a.href = "/rating_page";
       }
       function onclickToggleButton(buttonNum) {
         var toggle1 = document.getElementById('toggle1');
@@ -256,6 +255,7 @@
           <table id="myTable" cellpadding="2" cellspacing="2" onclick="tester()"></table>
           <div class = "linking">
             <a href="javascript:see_rating();" id = "see_rating" class="button2" target="_blank">평가보기</a>
+            <!-- <a href="/rating_page" id = "see_rating" class="button2" target="_blank">평가보기</a> -->
           </div>
         </div>
         <div id = "map_view">
@@ -266,6 +266,8 @@
       var rid = 0;
       jQuery('#restaurants').change(function() {
         rid = jQuery('#restaurants option:selected').val();
+        localStorage.setItem("rid", rid);
+        console.log(rid);
         // console.log(state);
         jQuery.ajax({
           type:"GET",
