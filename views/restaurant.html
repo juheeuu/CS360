@@ -4,93 +4,119 @@
     <link rel = "stylesheet" type = "text/css" href = "css/style.css">
     <meta name = "viewport" contetn = "initial-scale=1.0, user-scalable=yes">
     <meta charset = "euc-kr">
-
     <style>
-        table {
-            width: 80%;
-            margin: auto;
-            border:  1px solid rgba(255, 255, 255, 0.4);
-        }
-        div.buttonWrapper {
-            width: 10%;
-            margin: auto;
-        }
-        div.buttonWrapper {
+            table {
+                width: 80%;
                 margin: auto;
-        }
-        .deliveryLocationTextStyle {
-            margin: auto;
-        }
-        table.blueTable {
-            border: 1px solid #1C6EA4;
-            background-color: #EEEEEE;
-            border-collapse: collapse;
-            text-align: center;
-        }
-        table.blueTable td, table.blueTable th {
-            border: 1px solid #AAAAAA;
-            padding: 3px 2px;
-        }
-        .classify{
-            font-weight: bold;
-            font-size: 15px;
-            background-color: #59C2BC;
-            color : #FFFFFF;
-        }
-        .deliverplacehead{
-          font-weight:bold;
-          font-size:20px;
-        }
-
-    </style>
+                border:  1px solid rgba(255, 255, 255, 0.4);
+            }
+            div.buttonWrapper {
+                margin: auto;
+            }
+            .deliveryLocationTextStyle {
+                margin: auto;
+            }
+            table.blueTable {
+                box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 0px;
+                margin-top: 20px;
+                border-width: 0px;
+                border-style: solid;
+                border-color: rgb(255, 255, 255);
+                background-color: white;
+                border-radius: 10px;
+            }
+            .classify{
+                font-weight: bold;
+                font-size: 15px;
+                background-color: #59C2BC;
+                color: black;
+            }
+        </style>
   </head>
+<body style="margin: 0;">
+    <div class="topBar">
+        <div class="title" >Restaurant-Sign Up </div>
+      </div>
+      <table class="blueTable">
+          <tr>
+              <td class="classify"> ID </td>
+              <td> <input> </td>
+          </tr>
+          <tr>
+                <td class="classify"> Name </td>
+                <td> <input> </td>
+        </tr>
+          <tr>
+            <td class="classify"> Password </td>
+            <td> <input> </td>
+          </tr>
+          <tr>
+            <td class="classify"> PhoneNumber </td>
+            <td> <input> </td>
+          </tr>
+          <tr>
+                <td class="classify"> Information </td>
+                <td> <input> </td>
+              </tr>
+          <tr>
+                <td class="classify"> Location </td>
+                <td> <input> </td>
+              </tr>
 
-  <body style="margin: 0;">
-      <div class="topBar">
-          <div class="title" > 식당 정보 </div>
-        </div>
-        <table class="blueTable">
-            <tr>
-                <td class="classify"> ID </td>
-                <td> <input> </td>
-            </tr>
-            <tr>
-                <td class="classify"> 비밀번호 </td>
-                <td> <input> </td>
-            </tr>
-            <tr>
-                <td class="classify"> 카테고리 </td>
-                <td> <input> </td>
-            </tr>
-            <tr>
-                <td class="classify"> 전화번호 </td>
-                <td> <input> </td>
-            </tr>
-            <tr>
-                <td class="classify"> 장소 </td>
-                <td> <input> </td>
-            </tr>
-            <tr>
-                <td class="classify"> 배달가능 지역 </td>
+          <tr>
+              <td class="classify"> Category </td>
+              <td> <select style="width: 300px">
+                      <option value="hamburger">hamburger</option>
+                      <option value="chicken">chicken</option>
+                      <option value="meal">meal</option>
+                    </select>  </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="deliveryLocationTextStyle"> Delivery Location </td>
+          </tr>
+          <tr>
+              <td class="classify">
+                  Girls Dorm
+              </td>
+              <td>
+                  <input type="radio" name="girldorm" value="pos">  Possible
+                  <input type="radio" name="girldorm" value="neg">  Impossible
+              </td>
+          </tr>
+          <tr>
+                <td class="classify">
+                    Taxi Station
+                </td>
                 <td>
-                  <div>
-                    <p><span class="deliverplacehead">여사</span>
-                      <input type="radio" name="girldorm" value="pos">  가능
-                      <input type="radio" name="girldorm" value="neg">  불가능
-                    </p>
-                    <p><span class="deliverplacehead">택승</span>
-                      <input type="radio" name="girldorm" value="pos">  가능
-                      <input type="radio" name="girldorm" value="neg">  불가능
-                    </p>
-                    <p><span class="deliverplacehead">동측</span>
-                      <input type="radio" name="girldorm" value="pos">  가능
-                      <input type="radio" name="girldorm" value="neg">  불가능
-                    </p>
-                  </div>
+                    <input type="radio" name="taxi" value="pos">  Possible
+                    <input type="radio" name="taxi" value="neg">  Impossible
                 </td>
             </tr>
-        </table>
-        <div class="buttonWrapper">
-        <button class="button" id="signin_button" >submit</button>
-        </div>
+            <tr>
+                <td class="classify">
+                    East entry
+                </td>
+                <td>
+                    <input type="radio" name="east" value="pos"> Possible
+                    <input type="radio" name="east" value="neg"> Impossible
+                </td>
+            </tr>
+            <tr>
+                <td class="classify">
+                    Hope Dorm
+                </td>
+                <td>
+                    <input type="radio" name="hope" value="pos"> Possible
+                    <input type="radio" name="hope" value="neg"> Impossible
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="buttonWrapper">
+                    <button class="button" id="signin_button" >submit</button>
+                    </div>
+                </td>
+            </tr>
+      </table>
+</body>
 </html>
