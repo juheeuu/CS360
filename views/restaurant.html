@@ -9,6 +9,11 @@
                 width: 80%;
                 margin: auto;
                 border:  1px solid rgba(255, 255, 255, 0.4);
+                margin: 0 auto;
+                position: fixed;
+                top: 15%;
+                left: 10%;
+                right: 10%;
             }
             div.buttonWrapper {
                 margin: auto;
@@ -21,8 +26,7 @@
                 margin-top: 20px;
                 border-width: 0px;
                 border-style: solid;
-                border-color: rgb(255, 255, 255);
-                background-color: white;
+                background-color: rgba(255, 255, 255, 0.97);
                 border-radius: 10px;
             }
             .classify{
@@ -41,80 +45,34 @@
     <div class="topBar">
         <div class="title" >Restaurant Information </div>
       </div>
+      <img src="static/KAIST.jpeg" width="100%">
+
       <table class="blueTable">
           <tr>
               <td class="classify"> ID </td>
-              <td> <input id="id"> </td>
+              <td> <p id="idRestaruant"> </p></td>
           </tr>
           <tr>
                 <td class="classify"> Name </td>
-                <td> <input id="name"> </td>
+                <td> <p id="name"></p></td>
         </tr>
           <tr>
-            <td class="classify"> Password </td>
-            <td> <input id="pwd"> </td>
-          </tr>
-          <tr>
             <td class="classify"> PhoneNumber </td>
-            <td> <input id="number"> </td>
+            <td> <p id="PhoneNumber"></p> </td>
           </tr>
           <tr>
                 <td class="classify"> Information </td>
-                <td> <input id="inform"> </td>
+                <td> <p id="inform"></p> </td>
               </tr>
           <tr>
                 <td class="classify"> Location </td>
-                <td> <input id="location"> </td>
+                <td> <p id="location"> </p></td>
               </tr>
 
           <tr>
               <td class="classify"> Category </td>
-              <td> <select style="width: 300px">
-                      <option value="hamburger">hamburger</option>
-                      <option value="chicken">chicken</option>
-                      <option value="raw_fish">raw_fish</option>
-                      <option value="pork">pork</option>
-                    </select>  </td>
+              <td> <p id="category"></p> </td>
           </tr>
-          <tr>
-            <td colspan="2" class="deliveryLocationTextStyle"> Delivery Location </td>
-          </tr>
-          <tr>
-              <td class="classify">
-                  Girls Dorm
-              </td>
-              <td>
-                  <input type="radio" name="girldorm" value="pos">  Possible
-                  <input type="radio" name="girldorm" value="neg">  Impossible
-              </td>
-          </tr>
-          <tr>
-                <td class="classify">
-                    Taxi Station
-                </td>
-                <td>
-                    <input type="radio" name="taxi" value="pos">  Possible
-                    <input type="radio" name="taxi" value="neg">  Impossible
-                </td>
-            </tr>
-            <tr>
-                <td class="classify">
-                    East entry
-                </td>
-                <td>
-                    <input type="radio" name="east" value="pos"> Possible
-                    <input type="radio" name="east" value="neg"> Impossible
-                </td>
-            </tr>
-            <tr>
-                <td class="classify">
-                    Hope Dorm
-                </td>
-                <td>
-                    <input type="radio" name="hope" value="pos"> Possible
-                    <input type="radio" name="hope" value="neg"> Impossible
-                </td>
-            </tr>
             <tr>
                 <td colspan="2">
                     <div class="buttonWrapper">
@@ -123,5 +81,28 @@
                 </td>
             </tr>
       </table>
+      <script>
+          $(document).ready(function() {
+            jQuery.ajax({
+                type:"GET",
+                url:'restaurant/inform',
+                dataType:"JSON",
+                success: function(data){
+                    $("#idRestaruant").text(data.idRestaruant);
+                    $("#name").text(data.name);
+                    $("#PhoneNumber").text(data.PhoneNumber);
+                    $("#inform").text(data.inform);
+                    $("#location").text(data.location);
+                    $("#category").text(data.category);
+                },
+                complete: function(data){
+
+                },
+                error: function(xhr, status, error){
+                    alert("calling restaurant has " + status);
+                },
+            });
+          });
+      </script>
 </body>
 </html>
