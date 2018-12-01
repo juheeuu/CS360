@@ -38,6 +38,91 @@ module.exports = function(app, fs, connection){
     });
   });
 
+  app.get('/restaurant/all', (req, res) =>{
+    console.log("GET /restaurant/all");
+    connection.query("SELECT * FROM Restaruant", function(err, rows, fields){
+      if(err){
+        console.log(err);
+        res.end("DB error")
+        return;
+      }
+      //const result = {"Success" : "True", "Data" : rows}
+      res.send(rows);
+    });
+  });
+
+
+
+  app.get('/restaurant/inform', (req, res) =>{
+    console.log("GET /restaurant/inform");
+    const rid = req.query.rid;
+    connection.query("SELECT * FROM Restaruant WHERE idRestaruant=?", [rid], function(err, rows, fields){
+      if(err){
+        console.log(err);
+        res.end("DB error")
+        return;
+      }
+
+      // If result exist
+      if(rows.length == 0){
+        res.send({"Success" : "False", "Message" : "No data"});
+        return;
+      }
+      else if(rows.length > 1){
+        res.send({"Success" : "False", "Message" : "Duplicated data"});
+        return;
+      }else{
+        //rows[0].Success = "True"
+        res.send(rows[0]);
+        res.end();
+        return;
+      }
+    });
+  });
+
+  // JOIN 사용
+  app.get('/restaurant/comments', (req, res) =>{
+    console.log("GET /restaurant/comments");
+    const rid = req.query.rid;
+    //connection.query("SELECT * FROM Evlauation WHERE Restaruant_idRestaruant=?", [rid], function(err, rows, fields){
+    connection.query("SELECT Student_idStudent,EvaluationData,EvaluationValue FROM (Evlauation JOIN Restaruant) WHERE idRestaruant=?", [rid], function(err, rows, fields){
+      if(err){
+        console.log(err);
+        res.end("DB error")
+        return;
+      }
+
+      // If result exist
+      if(rows.length == 0){
+        res.send({"Success" : "False", "Message" : "No data"});
+        return;
+      }else{
+        //const ans = {"Success" : "True", "Data" : rows};
+        res.send(rows);
+        res.end();
+        return;
+      }
+    });
+  });
+
+  //aggregation
+  app.get('/restaurant/avg_value', (req, res) =>{
+    console.log("GET /restaurant/avg_value");
+    const rid = req.query.rid;
+    //connection.query("SELECT * FROM Evlauation WHERE Restaruant_idRestaruant=?", [rid], function(err, rows, fields){
+    connection.query("SELECT AVG(EvaluationValue) FROM Evlauation WHERE Restaruant_idRestaruant=?", [rid], function(err, rows, fields){
+      if(err){
+        console.log(err);
+        res.end("DB error")
+        return;
+      }
+
+      //const ans = {"Success" : "True", "Value" : rows[0]["AVG(EvaluationValue)"]}
+      const ans = {"Value" : rows[0]["AVG(EvaluationValue)"]}
+      res.send(ans);
+    });
+  });
+
   app.get('/restaurant_login', (req, res) =>{
     console.log("GET /restaurant_login");
     const sess = req.session;
@@ -114,6 +199,75 @@ module.exports = function(app, fs, connection){
           res.send(informs[0]);
         });
       };
+    });
+  });
+
+  app.get('/delivery/category', (req, res) =>{
+    console.log("GET /delivery/category");
+    const category = req.query.category;
+    connection.query("SELECT * FROM Restaruant WHERE category=?", [category], function(err, rows, fields){
+      if(err){
+        console.log(err);
+        res.end("DB error")
+        return;
+      }
+
+      // If result exist
+      if(rows.length == 0){
+        res.send({"Message" : "No data"});
+        return;
+      }else{
+        //const ans = {"Success" : "True", "Data" : rows};
+        res.send(rows);
+        res.end();
+        return;
+      }
+    });
+  });
+
+  app.get('/delivery/space', (req, res) =>{
+    console.log("GET /delivery/space");
+    const sid = req.query.sid;
+    connection.query("SELECT * FROM Duration WHERE Space_idSpace=?", [sid], function(err, rows, fields){
+      if(err){
+        console.log(err);
+        res.end("DB error")
+        return;
+      }
+
+      // If result exist
+      if(rows.length == 0){
+        res.send({"Success" : "False", "Message" : "No data"});
+        return;
+      }else{
+        //const ans = {"Success" : "True", "Data" : rows};
+        res.send(rows);
+        res.end();
+        return;
+      }
+    });
+  });
+
+  app.get('/delivery/restaurant', (req, res) =>{
+    console.log("GET /delivery/restaurant");
+    const rid = req.query.rid;
+    connection.query("SELECT * FROM Duration WHERE Restaruant_idRestaruant=?", [rid], function(err, rows, fields){
+      if(err){
+        console.log(err);
+        res.end("DB error")
+        return;
+      }
+
+      // If result exist
+      if(rows.length == 0){
+        res.send({"Success" : "False", "Message" : "No data"});
+        return;
+      }else{
+        //const ans = {"Success" : "True", "Data" : rows};
+        res.send(rows);
+        res.end();
+        return;
+      }
     });
   });
 }
