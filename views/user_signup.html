@@ -22,14 +22,13 @@
             margin: auto;
         }
         table.blueTable {
-            border: 1px solid #1C6EA4;
-            background-color: #EEEEEE;
-            border-collapse: collapse;
-            text-align: center;
-        }
-        table.blueTable td, table.blueTable th {
-            border: 1px solid #AAAAAA;
-            padding: 3px 2px;
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 0px;
+            margin-top: 20px;
+            border-width: 0px;
+            border-style: solid;
+            border-color: rgb(255, 255, 255);
+            background-color: white;
+            border-radius: 10px
         }
         .classify{
             font-weight: bold;
@@ -55,7 +54,7 @@
             </tr>
             <tr>
                 <td class="classify"> Dormitory </td>
-                <td> <select>
+                <td> <select style="width:200px">
                         <option value="west">West</option>
                         <option value="east">East</option>
                         <option value="north">North</option>
@@ -63,7 +62,7 @@
             </tr>
             <tr>
                 <td class="classify"> Prefermenu </td>
-                <td> <select>
+                <td> <select style="width:200px">
                         <option value="hamburger">hamburger</option>
                         <option value="chicken">chicken</option>
                         <option value="meal">meal</option>
