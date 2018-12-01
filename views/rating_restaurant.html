@@ -64,11 +64,10 @@
         <div class="title" > Rating </div>
         <button class="button" > Logout </button>
     </div>
-    <div class="mainPhrase">
+    <!-- <div class="mainPhrase">
         👏 Would you like to rate the restaurant? 👏
     </div>
-    <form action="rating/edit" method="post" id = "rating_form">
-      <input id = "rating_rid" name="rid" style="display: none;">
+    <form action="rating_form" method="post" id = "rating_form">
       <table class="rating">
         <tr>
           <td class="classify"> Score </td>
@@ -91,13 +90,14 @@
     </form>
     <div class="buttonWrapper">
       <button type = "submit" form = "rating_form" class="button" id="rating_button" >submit</button>
-    </div>
+    </div> -->
+
     <div class="mainPhrase">
         👇 These are ratings about the restaurant!👇
     </div>
     <script>
+      console.log("QQQ");
       var rid = localStorage.getItem("rid");
-      document.getElementById("rating_rid").value = rid;
       var tables = [];
       $(document).ready(function() {
         jQuery.ajax({

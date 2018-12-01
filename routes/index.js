@@ -22,6 +22,10 @@ module.exports = function(app, fs, connection)
   app.get('/rating_page', function(req,res){
     res.render('rating.html')
   });
+
+  app.get('/rating_restaurant', function(req,res){
+    res.render('rating_restaurant.html')
+  });
   app.get('/restaurant_modify', function(req,res){
     res.render('restaurant_modify.html')
   });

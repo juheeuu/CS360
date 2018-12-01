@@ -73,7 +73,7 @@
                 <td colspan="2">
                     <div class="buttonWrapper">
                         <button class="button" id="signin_button" onclick="modify_res_info();">Modify information</button>
-                        <button class="button" id="signin_button" >See my Rating</button>
+                        <button class="button" id="signin_button" onclick="redirect_rating();">See my Rating</button>
                     </div>
                 </td>
             </tr>
@@ -90,6 +90,7 @@
                     $("#PhoneNumber").text(data.PhoneNumber);
                     $("#inform").text(data.inform);
                     $("#category").text(data.category);
+                    localStorage.setItem("rid", data.idRestaruant);
                 },
                 complete: function(data){
 
@@ -101,6 +102,9 @@
           });
           const modify_res_info = function() {
             location.href="/restaurant_modify"
+          }
+          const redirect_rating = function(){
+            location.href="/rating_restaurant"
           }
       </script>
 </body>
