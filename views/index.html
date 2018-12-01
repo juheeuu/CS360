@@ -5,7 +5,8 @@
     <meta name = "viewport" contetn = "initial-scale=1.0, user-scalable=yes">
     <meta charset = "euc-kr">
     <link rel="stylesheet" href="css/style.css">
-
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   </head>
   <body style="margin: 0;">
       <div class="topBar">
@@ -25,12 +26,12 @@
             <button class="input" id="active_restaurant" onclick="active_restaurant();" > Restaurant </button>
         </div>
         <button class="submit" id="Login_button" onclick="login();">Login</button>
-        <a href="user_signup"><button class="submit" id="Signup_button" >Sign up</button></a>  
+        <a href="user_signup"><button class="submit" id="Signup_button" >Sign up</button></a>
 
     </div>
     <script type="text/javascript">
       let active = 0;
-   
+
       const active_student = function(){
         console.log("active_student")
         active = 1;
@@ -56,7 +57,15 @@
 
         const response = await fetch('/' + side + '_login?id=' + id + "&password=" + pwd);
         const myjson = await response.json();
-        console.log(myjson);
+        if(myjson["Success"] == "True"){
+          if(active == 1){
+            location.href = "/user";
+          }else if(active == 2){
+            location.href = "/restaurant";
+          }
+        }else{
+          alert("Login Failure");
+        }
       }
     </script>
   </body>
