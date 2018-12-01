@@ -97,8 +97,8 @@ module.exports = function(app, fs, connection){
 
 
   // JOIN 사용
-  app.get('/restaurant/comments', (req, res) =>{
-    console.log("GET /restaurant/comments");
+  app.get('/rating', (req, res) =>{
+    console.log("GET /rating");
     const rid = req.query.rid;
     //connection.query("SELECT * FROM Evlauation WHERE Restaruant_idRestaruant=?", [rid], function(err, rows, fields){
     connection.query("SELECT Student_idStudent,EvaluationData,EvaluationValue FROM (Evlauation JOIN Restaruant) WHERE idRestaruant=?", [rid], function(err, rows, fields){
@@ -122,8 +122,8 @@ module.exports = function(app, fs, connection){
   });
 
   //aggregation
-  app.get('/restaurant/avg_value', (req, res) =>{
-    console.log("GET /restaurant/avg_value");
+  app.get('/rating/avg_value', (req, res) =>{
+    console.log("GET /rating/avg_value");
     const rid = req.query.rid;
     //connection.query("SELECT * FROM Evlauation WHERE Restaruant_idRestaruant=?", [rid], function(err, rows, fields){
     connection.query("SELECT AVG(EvaluationValue) FROM Evlauation WHERE Restaruant_idRestaruant=?", [rid], function(err, rows, fields){
