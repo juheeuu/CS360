@@ -128,17 +128,22 @@
           url:"/restaurant/menu?rid="+state,
           dataType:"JSON",
           success: function(data){
-            var i = 0;
-            $.each(data, function() {
-              // console.log(data);
-              // console.log(data[i]);
-              var menu_name = data[i].menu_name;
-              var price = data[i].price;
-              console.log(data.length);
-              tableCreate(menu_name, price, i);
-              jQuery('.layer').show();
-              i = i + 1;
-            })
+            if(data == ""){
+              document.getElementById("res_menu").innerHTML = "메뉴가 없습니다";
+            }else {
+              document.getElementById("res_menu").innerHTML = "메뉴";
+              var i = 0;
+              $.each(data, function() {
+                // console.log(data);
+                // console.log(data[i]);
+                var menu_name = data[i].menu_name;
+                var price = data[i].price;
+                console.log(data.length);
+                tableCreate(menu_name, price, i);
+                jQuery('.layer').show();
+                i = i + 1;
+              })
+            }
           },
           complete: function(data){
           },
@@ -175,7 +180,7 @@
       </div>
       <div class = "content2">
         <div class = "layer">
-          <p>메뉴</p>
+          <p id = "res_menu">메뉴</p>
           <table id="myTable" cellpadding="2" cellspacing="2" onclick="tester()"></table>
           <div class = "linking">
             <a href="" class="button2" target="_blank">평가보기</a>
