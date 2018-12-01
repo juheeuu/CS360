@@ -99,7 +99,7 @@ module.exports = function(app, fs, connection){
   app.get('/rating', (req, res) =>{
     console.log("GET /rating");
     const rid = req.query.rid;
-    connection.query("SELECT stuId,Description,score FROM (Rating JOIN Restaruant ON resID=idRestaruant) WHERE idRestaruant=?", [rid], function(err, rows, fields){
+    connection.query("SELECT stuId,Description,score FROM (Rating JOIN Restaruant) WHERE idRestaruant=?", [rid], function(err, rows, fields){
       if(err){
         console.log(err);
         res.end("DB error")

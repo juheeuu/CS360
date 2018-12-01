@@ -19,7 +19,7 @@ module.exports = function(app, fs, connection)
     res.render('restaurant_signup.html')
   });
 
-  app.get('/rating', function(req,res){
+  app.get('/rating_page', function(req,res){
     res.render('rating.html')
   });
 
