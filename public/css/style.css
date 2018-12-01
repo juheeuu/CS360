@@ -132,20 +132,20 @@ select{
   height: 90%;
   padding-left: 10px;
   font-size: 30px;
-  color: #000000;
-  border: 1px solid #C6E5ED;
+  color: #59C2BC;
+  border: 1px solid #59C2BC;
   border-radius: 3px;
   margin-left: 10px;
   margin-right: 10px;
 }
 
 select option:checked {
-  background: #59C2BC;
+  background-color: #59C2BC;
   color: #fff;
 }
 select option:hover {
-    background: #59C2BC;
-    color: #fff;
+  background: #59C2BC;
+  color: #fff;
 }
 .content2{
   display: flex;
@@ -161,7 +161,7 @@ select option:hover {
   padding-left: 10px;
   font-size: 30px;
   background-color: #ffffff;
-  color: #000000;
+  color: #59C2BC;
   border: 1px solid #C6E5ED;
   border-radius: 3px;
   margin-left: 10px;
@@ -350,4 +350,40 @@ select option:hover {
 #map_view{
   width: 100%;
   position: relative;
+}
+
+table {
+  width: 90%;
+  border-top: 1px solid #59C2BC;
+  border-collapse: collapse;
+}
+th {
+  font-size: 20px;
+  color: #59C2BC;
+}
+th, td {
+  border-bottom: 1px solid #59C2BC;
+  border-color: #59C2BC;
+  padding: 10px;
+  text-align: center;
+  color: #59C2BC;
+}
+.linking {
+  margin-top: 50px;
+  text-align: center;
+}
+.button2 {
+  background-color: #59C2BC;
+  color: white;
+  border: 2px solid #59C2BC;
+  border-radius:8px;
+  padding: 14px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.button2:hover {
+  background-color: white;
+  color: #59C2BC;
 }

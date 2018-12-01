@@ -124,7 +124,7 @@
 
             },
             error: function(xhr, status, error){
-              alert("sid 다시 찾아봐라잉");
+              // alert("sid 다시 찾아봐라잉");
             }
           });
         });
@@ -137,14 +137,40 @@
     </div>
     <div class = "root">
       <div class = "content">
-        <select class = "form-control" id = "restaurants" name = "restaurants" onchange = 'initialize()' data-source = "http://localhost:3001/restaurant/all" data-valueKey = "idRestaruant" data-displayKey = "name">
+        <select class = "form-control" id = "restaurants" size = "20" name = "restaurants" onchange = 'initialize()' data-source = "http://localhost:3001/restaurant/all" data-valueKey = "idRestaruant" data-displayKey = "name">
+          <option>두메</option>
+          <option>지코바</option>
+          <option>대학생 치킨</option>
+          <option>맘스터치</option>
         </select>
       </div>
       <div class = "content2">
         <div class = "layer">
-          <p>두메에요! <br /> 여기 맛있어요!</p>
-          <h1>메뉴</h1>
-          <p>밥! <br /> 매운밥!</p>
+          <p>두메숯불 바베큐</p>
+          <table>
+            <thead>
+              <tr>
+                <th> </th><th>메뉴</th><th> </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>양념<br/>삼겹살</td><td> </td><td>14,000</td>
+              </tr>
+              <tr>
+                <td>소금<br/>삼겹살</td><td> </td><td>14,000</td>
+              </tr>
+              <tr>
+                <td>양념<br/>닭구이</td><td> </td><td>14,000</td>
+              </tr>
+              <tr>
+                <td>소금<br/>닭구이</td><td> </td><td>14,000</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class = "linking">
+            <a href="" class="button2" target="_blank">평가보기</a>
+          </div>
         </div>
         <div id = "map_view">
         </div>
