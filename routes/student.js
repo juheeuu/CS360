@@ -1,35 +1,57 @@
+const http = require('http');
+const { parse } = require('querystring');
+function collectRequestData(request, callback) {
+    const FORM_URLENCODED = 'application/x-www-form-urlencoded';
+    if(request.headers['content-type'] === FORM_URLENCODED) {
+        let body = '';
+        request.on('data', chunk => {
+            body += chunk.toString();
+        });
+        request.on('end', () => {
+            callback(parse(body));
+        });
+    }
+    else {
+        callback(null);
+    }
+}
 module.exports = function(app, fs, connection){
   app.post('/student_signup', (req, res) =>{
-    console.log("POST /student_signup");
-    //console.log(req.body);
-    const id = req.body["id"];
-    const password = req.body["password"];
-    const prefermenu = req.body["prefermenu"];
-    const space = req.body["idSpace"];
-    //console.log(typeof space)
+    collectRequestData(req, result => {
+        console.log("POST /student_signup");
+        // console.log(req.body);
+        // const id = req.body["id"];
+        // const password = req.body["password"];
+        // const prefermenu = req.body["prefermenu"];
+        // const space = req.body["idSpace"];
+        //console.log(typeof space)
+        var id = result.id;
+        var password = result.password;
+        var prefermenu = result.prefermenu;
+        var space = result.idSpace;
 
-    connection.query("SELECT * FROM Student WHERE idStudent=?", [id], function(err, rows, fields){
-      if(err){
-        console.log(err);
-        res.end("DB error_SELECT")
-        return;
-      }
-
-      if(rows.length > 0){
-        res.send({"Success" : "False", "Message" : "Already existing id"});
-        return;
-      }else{
-        //INSERT INTO `Delivery`.`Student` (`idStudent`, `Password`, `prefermenu`) VALUES ('1', '1234', '2');
-        connection.query("INSERT INTO Student (idStudent, Password, prefermenu, idSpace) VALUES (?, ?, ?, ?)", [id, password, prefermenu, space], function(err, rows, fields){
+        connection.query("SELECT * FROM Student WHERE idStudent=?", [id], function(err, rows, fields){
           if(err){
             console.log(err);
-            res.end("DB error_INSERT")
+            res.end("DB error_SELECT")
+            return;
+          }
+          if(rows.length > 0){
+            res.send({"Success" : "False", "Message" : "Already existing id"});
             return;
           }else{
-            res.send({"Success" : "True"});
+            //INSERT INTO `Delivery`.`Student` (`idStudent`, `Password`, `prefermenu`) VALUES ('1', '1234', '2');
+            connection.query("INSERT INTO Student (idStudent, Password, prefermenu, idSpace) VALUES (?, ?, ?, ?)", [id, password, prefermenu, space], function(err, rows, fields){
+              if(err){
+                console.log(err);
+                res.end("DB error_INSERT")
+                return;
+              }else{
+                res.send({"Success" : "True"});
+              }
+            });
           }
         });
-      }
     });
   });
 
