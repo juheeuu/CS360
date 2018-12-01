@@ -37,7 +37,10 @@ module.exports = function(app, fs, connection){
             return;
           }
           if(rows.length > 0){
-            res.send({"Success" : "False", "Message" : "Already existing id"});
+            //res.send({"Success" : "False", "Message" : "Already existing id"});
+            // req.flash("Error", "이미 존재하는 아이디입니다")
+            res.redirect("/user_signup");
+
             return;
           }else{
             //INSERT INTO `Delivery`.`Student` (`idStudent`, `Password`, `prefermenu`) VALUES ('1', '1234', '2');
@@ -47,14 +50,14 @@ module.exports = function(app, fs, connection){
                 res.end("DB error_INSERT")
                 return;
               }else{
-                res.send({"Success" : "True"});
+                //res.send({"Success" : "True"});
+                res.redirect("/")
               }
             });
           }
         });
     });
   });
-
   app.get('/student_login', (req, res) =>{
     console.log("GET /login");
     const sess = req.session;
@@ -64,7 +67,7 @@ module.exports = function(app, fs, connection){
     connection.query("SELECT * FROM Student WHERE idStudent=? AND Password=?", [id, password], function(err, rows, fields){
       if(err){
         console.log(err);
-        res.end("DB error")
+        res.send("DB error")
         return;
       }
 
@@ -72,7 +75,7 @@ module.exports = function(app, fs, connection){
         sess.user_id = id;
         res.send({"Success" : "True"});
       }else{
-        res.end({"Success" : "False"});
+        res.send({"Success" : "False"});
       }
     });
   });
@@ -98,7 +101,7 @@ module.exports = function(app, fs, connection){
     connection.query("DELETE FROM Student WHERE idStudent=?", [3], function(err, rows, fields){
       if(err){
         console.log(err);
-        res.end("DB error")
+        res.send("DB error")
         return;
       }
 
@@ -108,7 +111,7 @@ module.exports = function(app, fs, connection){
             req.session.destroy();
         }
       }else{
-        res.end({"Success" : "False"});
+        res.send({"Success" : "False"});
       }
     });
   });

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
   </head>
   <body style="margin: 0;">
       <div class="topBar">
@@ -62,6 +63,10 @@
           side = "student"
         }else if(active == 2){
           side = "restaurant"
+        }
+
+        if(id == "" || pwd == ""){
+          alert("로그인 정보를 입력해주세요")
         }
 
         const response = await fetch('/' + side + '_login?id=' + id + "&password=" + pwd);

@@ -79,7 +79,7 @@
 
         var N_X = 36.373765;
         var N_Y = 127.358389;
-        var W_X = 36.370270;
+        var W_X = 36.370270; 
         var W_Y = 127.355714;
         var E_X = 36.371117;
         var E_Y = 127.366528;
@@ -177,10 +177,60 @@
         if (buttonNum==1) {
             toggle1.style.background="-webkit-linear-gradient(top, #65a9d7, #59C2BC)";
             toggle2.style.background="grey";
+            showAllMenus();
         } else if (buttonNum == 2) {
           toggle2.style.background="-webkit-linear-gradient(top, #65a9d7, #59C2BC)";
           toggle1.style.background="grey";
+          showPreferMenu();
         }
+      }
+      function showPreferMenu() {
+        var $select = $('#restaurants');
+        jQuery.ajax({
+          type:"GET",
+          url:"/preferred_restaurants",
+          dataType:"JSON",
+          success: function(data){
+            if (data.Success == "False") {
+              alert("There are no corresponding restaurant!");
+            } else {
+              var i = 0;
+              $select.children('option:not(:first)').remove();
+              $.each(data, function() {
+                $select.append($('<option />', { value: data[i].idRestaruant, text: data[i].name }));
+                i = i + 1;
+              });
+              $select.children('option:first').remove();
+            };
+          },
+          complete: function(data){
+          },
+          error: function(xhr, status, error){
+            alert("calling restaurant has " + status);
+          },
+        });
+      }
+      function showAllMenus() {
+        var $select = $('#restaurants');
+        jQuery.ajax({
+          type:"GET",
+          url:"/restaurant/all",
+          dataType:"JSON",
+          success: function(data){
+              $select.children('option:not(:first)').remove();
+              var i = 0;
+              $.each(data, function() {
+                $select.append($('<option />', { value: data[i].idRestaruant, text: data[i].name }));
+                i = i + 1;
+              });
+              $select.children('option:first').remove();
+          },
+          complete: function(data){
+          },
+          error: function(xhr, status, error){
+            alert("calling restaurant has " + status);
+          },
+        });
       }
     </script>
     <style>
