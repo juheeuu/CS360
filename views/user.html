@@ -7,6 +7,7 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9d7BDC0wod1_b07oTSPjH_G1gpAuFYFU"
   type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
       function initialize() {
         var obj = document.getElementById('restaurants');
@@ -109,6 +110,25 @@
         infowindow.open(map, marker);
       }
     </script>
+    <script>
+        $(document).ready(function() {
+          jQuery.ajax({
+            type:"GET",
+            url:"delivery/space?sid=1",
+            dataType:"JSON",
+            success: function(data){
+              // alert("What");
+              // alert(data.Data[0]["Space_idSpace"]);
+            },
+            complete: function(data){
+
+            },
+            error: function(xhr, status, error){
+              alert("sid 다시 찾아봐라잉");
+            }
+          });
+        });
+      </script>
   </head>
   <body style="margin:0;">
     <div class="topBar">
@@ -118,11 +138,7 @@
     </div>
     <div class = "root">
       <div class = "content">
-        <select id = "restaurants" name = "restaurants" size = '6' onchange = 'initialize()'>
-          <option value = "두메">두메</option>
-          <option value = "지코바">지코바</option>
-          <option value = "대학생 치킨">대학생 치킨</option>
-          <option value = "맘스터치">맘스터치</option>
+        <select class = "form-control" id = "restaurants" name = "restaurants" onchange = 'initialize()' data-source = "http://localhost:3001/restaurant/all" data-valueKey = "idRestaruant" data-displayKey = "name">
         </select>
       </div>
       <div class = "content2">
@@ -145,6 +161,27 @@
           jQuery('.layer').hide();
         }
       });
+    </script>
+    <script>
+      $('select[data-source]').each(function() {
+        var $select = $(this);
+        alert("bbb");
+        $select.append('<option></option>');
+
+        $.ajax({
+          url: $select.attr('data-source'),
+        }).then(function(options) {
+          options.map(function(option) {
+            var $option = $('<option>');
+            alert("aaa");
+            $option
+              .val(option[$select.attr('data-valueKey')])
+              .text(option[$select.attr('data-displayKey')]);
+
+            $select.append($option);
+          });
+        });
+      }))
     </script>
   </body>
 </html>
