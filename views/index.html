@@ -15,15 +15,16 @@
     <img src="static/KAIST.jpeg" width="100%">
       <div class="form">
         <div class="forceColor"></div>
-        <div class="topbar">
-          <div class="spanColor"></div>
-          <input class="input" id="id_input" name="id_input" placeholder="ID"/>
-          <input type="password" class="input" id="pwd_input" name="pwd_input" placeholder="Password"/>
-        </div>
+        <button class="loginDescription" >👇Choose One!👇</button>
         <div class="topbar">
             <div class="spanColor"></div>
             <button class="input" id="active_student" onclick="active_student();" > Student </button>
             <button class="input" id="active_restaurant" onclick="active_restaurant();" > Restaurant </button>
+        </div>
+        <div class="topbar">
+          <div class="spanColor"></div>
+          <input class="input" id="id_input" name="id_input" placeholder="ID"/>
+          <input type="password" class="input" id="pwd_input" name="pwd_input" placeholder="Password"/>
         </div>
         <button class="submit" id="Login_button" onclick="login();">Login</button>
         <a href="user_signup"><button class="submit" id="Signup_button" >Sign up</button></a>
@@ -35,10 +36,18 @@
       const active_student = function(){
         console.log("active_student")
         active = 1;
+        var student = document.getElementById('active_student');
+        var restaurant = document.getElementById('active_restaurant');
+        student.style.background = "black";
+        restaurant.style.background = "rgba(255, 255, 255, 0)";
       }
       const active_restaurant = function(){
         console.log("restaurant_student")
         active = 2;
+        var student = document.getElementById('active_student');
+        var restaurant = document.getElementById('active_restaurant');
+        restaurant.style.background = "black";
+        student.style.background = "rgba(255, 255, 255, 0)";
       }
 
       const login = async () => {

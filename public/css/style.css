@@ -302,7 +302,7 @@ select option:hover {
   font-family: Raleway;
   font-weight: 200;
   display: block;
-  color: white;
+  color: black;
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0.4);
   background: rgba(255, 255, 255, 0.5);
@@ -402,4 +402,21 @@ th, td {
 .button2:hover {
   background-color: white;
   color: #59C2BC;
+}
+.loginDescription {
+  padding: 10px 20px;
+  width: 100%;
+  font-size: 1.2rem;
+  font-family: Raleway;
+  font-weight: 200;
+  display: block;
+  color: black;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.5);
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 5px;
 }
