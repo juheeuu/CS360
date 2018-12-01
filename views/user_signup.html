@@ -40,39 +40,45 @@
 
   </head>
   <body style="margin: 0;">
-      <div class="topBar">
-          <div class="title" > Sign Up </div>
-        </div>
-        <table class="blueTable">
-            <tr>
-                <td class="classify"> ID </td>
-                <td > <input> </td>
-            </tr>
-            <tr>
-                <td class="classify"> Password </td>
-                <td> <input> </td>
-            </tr>
-            <tr>
-                <td class="classify"> Dormitory </td>
-                <td> <select style="width:200px">
-                        <option value="girl">여사</option>
-                        <option value="taxi">택승</option>
-                        <option value="east">동측</option>
-                        <option value="hope">희망</option>
-                      </select> </td>
-            </tr>
-            <tr>
-                <td class="classify"> Prefermenu </td>
-                <td> <select style="width:200px">
-                        <option value="hamburger">hamburger</option>
-                        <option value="chicken">chicken</option>
-                        <option value="pork">pork</option>
-                        <option value="fish">raw fish</option>
-                      </select>  </td>
-            </tr>
-        </table>
-        <div class="buttonWrapper">
-        <button class="button" id="signin_button" >submit</button>
-        </div>
-</body>
+    <div class="topBar">
+      <div class="title" > Sign Up </div>
+    </div>
+    <form action="student_signup" method="post" id = "signup_form">
+      <table class="blueTable">
+        <tr>
+          <td class="classify"> ID </td>
+          <td ><input name="id" type="text"> </td>
+        </tr>
+        <tr>
+          <td class="classify"> Password </td>
+          <td> <input name="password" type="password"> </td>
+        </tr>
+        <tr>
+          <td class="classify"> Dormitory </td>
+          <td>
+            <select name = "idSpace" style="width:200px">
+              <option value="3">여사</option>
+              <option value="4">택승</option>
+              <option value="5">동측</option>
+              <option value="6">희망</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="classify"> Prefermenu </td>
+          <td>
+            <select name = "prefermenu" style="width:200px">
+              <option value="hamburger">hamburger</option>
+              <option value="chicken">chicken</option>
+              <option value="pork">pork</option>
+              <option value="fish">raw fish</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <div class="buttonWrapper">
+      <button type = "submit" form = "signup_form" class="button" id="signin_button">submit</button>
+    </div>
+  </body>
 </html>
