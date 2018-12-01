@@ -1,5 +1,6 @@
 const http = require('http');
 const { parse } = require('querystring');
+
 function collectRequestData(request, callback) {
     const FORM_URLENCODED = 'application/x-www-form-urlencoded';
     if(request.headers['content-type'] === FORM_URLENCODED) {
@@ -116,12 +117,6 @@ module.exports = function(app, fs, connection){
     });
   });
 
-
-
-
-
-
-
   app.get('/preferred', (req, res) =>{
     console.log("GET /preferred");
     const id = req.session.user_id;
@@ -191,22 +186,29 @@ module.exports = function(app, fs, connection){
   });
 
   app.post('/rating/edit', (req, res) =>{
-    console.log("POST /rating/edit");
-    //const id = req.session.user_id;
-    const id = "2";
-    const rid = req.query.rid;
+    const id = req.session.user_id;
+    collectRequestData(req, result =>{
+      console.log("POST /rating/edit");
+      var rating = result.rating;
+      var description = result.description;
+      var rid = result.rid;
+      console.log(rid);
+      // const id = "2";
+      // const rid = req.query.rid;
+      // console.log(rating);
+      // console.log(description);
+      // const score = req.body.score;
+      // const content = req.body.Description;
 
-    const score = req.body.score;
-    const content = req.body.Description;
-
-    const ans = [id, rid, content, score];
-    connection.query("INSERT INTO Rating (stuId, resId, Description, score) VALUES (?, ?, ?, ?)", ans, function(err, rows, fields){
-      if(err){
-        console.log(err);
-        res.end("DB error")
-        return;
-      }
-      res.send({"Success" : "True"});
+      const ans = [id, rid, description, rating];
+      connection.query("INSERT INTO Rating (stuId, resId, Description, score) VALUES (?, ?, ?, ?)", ans, function(err, rows, fields){
+        if(err){
+          console.log(err);
+          res.end("DB error")
+          return;
+        }
+        res.send({"Success" : "True"});
+      });
     });
   });
 
