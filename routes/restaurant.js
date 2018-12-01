@@ -7,9 +7,8 @@ module.exports = function(app, fs, connection){
     const category = req.body["category"];
     const phoneNumber = req.body["PhoneNumber"];
     const location = req.body["location"];
-    const menu = req.body["Menu"];
 
-    const values = [id, name, category, phoneNumber, location, menu, password];
+    const values = [id, name, category, phoneNumber, location, password];
 
     //console.log(typeof space)
 
@@ -25,7 +24,7 @@ module.exports = function(app, fs, connection){
         return;
       }else{
         //INSERT INTO `Delivery`.`Student` (`idStudent`, `Password`, `prefermenu`) VALUES ('1', '1234', '2');
-        connection.query("INSERT INTO Restaruant (idRestaruant, name, category, PhoneNumber, location, Menu, password) VALUES (?, ?, ?, ?, ?, ?, ?)", values, function(err, rows, fields){
+        connection.query("INSERT INTO Restaruant (idRestaruant, name, category, PhoneNumber, location, password) VALUES (?, ?, ?, ?, ?, ?)", values, function(err, rows, fields){
           if(err){
             console.log(err);
             res.end("DB error_INSERT")
@@ -97,11 +96,10 @@ module.exports = function(app, fs, connection){
 
 
   // JOIN 사용
-  app.get('/restaurant/comments', (req, res) =>{
-    console.log("GET /restaurant/comments");
+  app.get('/rating', (req, res) =>{
+    console.log("GET /rating");
     const rid = req.query.rid;
-    //connection.query("SELECT * FROM Evlauation WHERE Restaruant_idRestaruant=?", [rid], function(err, rows, fields){
-    connection.query("SELECT Student_idStudent,EvaluationData,EvaluationValue FROM (Evlauation JOIN Restaruant) WHERE idRestaruant=?", [rid], function(err, rows, fields){
+    connection.query("SELECT stuId,Description,score FROM (Rating JOIN Restaruant) WHERE idRestaruant=?", [rid], function(err, rows, fields){
       if(err){
         console.log(err);
         res.end("DB error")
@@ -122,11 +120,10 @@ module.exports = function(app, fs, connection){
   });
 
   //aggregation
-  app.get('/restaurant/avg_value', (req, res) =>{
-    console.log("GET /restaurant/avg_value");
+  app.get('/rating/avg_value', (req, res) =>{
+    console.log("GET /rating/avg_value");
     const rid = req.query.rid;
-    //connection.query("SELECT * FROM Evlauation WHERE Restaruant_idRestaruant=?", [rid], function(err, rows, fields){
-    connection.query("SELECT AVG(EvaluationValue) FROM Evlauation WHERE Restaruant_idRestaruant=?", [rid], function(err, rows, fields){
+    connection.query("SELECT AVG(score) FROM Rating WHERE resId=?", [rid], function(err, rows, fields){
       if(err){
         console.log(err);
         res.end("DB error")
@@ -134,7 +131,7 @@ module.exports = function(app, fs, connection){
       }
 
       //const ans = {"Success" : "True", "Value" : rows[0]["AVG(EvaluationValue)"]}
-      const ans = {"Value" : rows[0]["AVG(EvaluationValue)"]}
+      const ans = {"Value" : rows[0]["AVG(score)"]}
       res.send(ans);
     });
   });
