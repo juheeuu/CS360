@@ -10,6 +10,11 @@
             width: 80%;
             margin: auto;
             border:  1px solid rgba(255, 255, 255, 0.4);
+            margin: 0 auto;
+            position: fixed;
+            top: 15%;
+            left: 10%;
+            right: 10%;
         }
         div.buttonWrapper {
             width: 10%;
@@ -33,8 +38,14 @@
         .classify{
             font-weight: bold;
             font-size: 15px;
-            background-color: #59C2BC;
+            background-color: rgba(89, 194, 188, 0.4);
             color: black;
+        }
+        #signin_button{
+          position: fixed;
+            top: 45%;
+            left: auto;
+            right: auto;
         }
     </style>
 
@@ -43,6 +54,8 @@
     <div class="topBar">
       <div class="title" > Sign Up </div>
     </div>
+    <img src="static/KAIST.jpeg" width="100%">
+
     <form action="student_signup" method="post" id = "signup_form">
       <table class="blueTable">
         <tr>
