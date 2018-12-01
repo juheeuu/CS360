@@ -20,5 +20,24 @@ module.exports = function(app, fs, connection)
   });
   app.get('/rating', function(req,res){
     res.render('rating.html')
+
+  app.post('/duration_add', (req, res) =>{
+    const id = req.body["id"];
+    const name = req.body["name"];
+    const location = req.body["location"];
+
+    const values = [id, location, name];
+
+    //console.log(typeof space)
+
+    connection.query("INSERT INTO Space (idSpace, location, name) VALUES (?, ?, ?)", values, function(err, rows, fields){
+      if(err){
+        console.log(err);
+        res.end("DB error_INSERT")
+        return;
+      }else{
+        res.send({"Success" : "True"});
+      }
+    });
   });
 }

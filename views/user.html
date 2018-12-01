@@ -138,10 +138,6 @@
     <div class = "root">
       <div class = "content">
         <select class = "form-control" id = "restaurants" size = "20" name = "restaurants" onchange = 'initialize()' data-source = "http://localhost:3001/restaurant/all" data-valueKey = "idRestaruant" data-displayKey = "name">
-          <option>두메</option>
-          <option>지코바</option>
-          <option>대학생 치킨</option>
-          <option>맘스터치</option>
         </select>
       </div>
       <div class = "content2">
@@ -190,24 +186,30 @@
     <script>
       $(document).ready(function() {
         var $select = $('#restaurants');
+        console.log("11111");
         jQuery.ajax({
           type:"GET",
-          url:"delivery/space?sid=1",
+          url:"restaurant/all",
           dataType:"JSON",
           success: function(data){
             // alert("What");
             // alert(data.Data[0]["Space_idSpace"]);
           },
           complete: function(data){
-            $.each(data, function(i, val){
-              $select.append($('<option />', { value: (i+1), text: val[i+1] }));
+            var restext = JSON.parse(data.responseText);
+            var i = 0;
+            $.each(restext, function() {
+              console.log(restext);
+              console.log(restext[i].name);
+              $select.append($('<option />', { text: restext[i].name }));
+              i = i + 1;
             });
           },
           error: function(xhr, status, error){
             alert("sid 다시 찾아봐라잉");
-          }
+          },
         });
-      }
+      });
     </script>
   </body>
 </html>

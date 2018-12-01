@@ -80,6 +80,22 @@ module.exports = function(app, fs, connection){
     });
   });
 
+  app.get('/restaurant/menu', (req, res) =>{
+    console.log("GET /restaurant/menu");
+    const rid = req.query.rid;
+    connection.query("SELECT * FROM Menu WHERE resID=?", [rid], function(err, rows, fields){
+      if(err){
+        console.log(err);
+        res.end("DB error")
+        return;
+      }
+
+      res.send(rows);
+      res.end();
+    });
+  });
+
+
   // JOIN 사용
   app.get('/restaurant/comments', (req, res) =>{
     console.log("GET /restaurant/comments");
@@ -251,7 +267,7 @@ module.exports = function(app, fs, connection){
   app.get('/delivery/restaurant', (req, res) =>{
     console.log("GET /delivery/restaurant");
     const rid = req.query.rid;
-    connection.query("SELECT * FROM Duration WHERE Restaruant_idRestaruant=?", [rid], function(err, rows, fields){
+    connection.query("SELECT * FROM Duration WHERE resID=?", [rid], function(err, rows, fields){
       if(err){
         console.log(err);
         res.end("DB error")
