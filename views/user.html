@@ -9,6 +9,69 @@
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
+      function call_map() {
+        var centerLatlng = new google.maps.LatLng(36.370465, 127.362162);
+        var zoomLevel = 16;
+        var mapOptions = {
+          zoom: zoomLevel,
+          center: centerLatlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById('map_view'), mapOptions);
+        return map;
+      }
+      function mgdorm(map) {
+        var gdorm_X = 36.373426;
+        var gdorm_Y = 127.356148;
+        var gdorm_Latlng = new google.maps.LatLng(gdorm_X, gdorm_Y);
+        var gdorm_Title = "여사";
+        var marker_gdorm = new google.maps.Marker({
+          position: gdorm_Latlng,
+          // map: map,
+          title: gdorm_Title,
+        });
+        return marker_gdorm;
+      }
+      function mtaxi(map) {
+        var taxi_X = 36.372825;
+        var taxi_Y = 127.359592;
+        var taxi_Latlng = new google.maps.LatLng(taxi_X, taxi_Y);
+        var taxi_Title = "택승";
+        var marker_taxi = new google.maps.Marker({
+          position: taxi_Latlng,
+          // map: map,
+          title: taxi_Title,
+        });
+        return marker_taxi;
+      }
+      function meast(map) {
+        var east_X = 36.370823;
+        var east_Y = 127.366475;
+        var east_Latlng = new google.maps.LatLng(east_X, east_Y);
+        var east_Title = "동측";
+        var marker_east = new google.maps.Marker({
+          position: east_Latlng,
+          // map: map,
+          title: east_Title,
+        });
+        return marker_east;
+      }
+      function mhope(map) {
+        var hope_X = 36.368596;
+        var hope_Y = 127.356945;
+        var hope_Latlng = new google.maps.LatLng(hope_X, hope_Y);
+        var hope_Title = "희망";
+        var marker_hope = new google.maps.Marker({
+          position: hope_Latlng,
+          // map: map,
+          title: hope_Title,
+        });
+        return marker_hope;
+      }
+      function show_marker(marker, map) {
+        marker.setMap(map);
+        google.maps.event.addListener(marker, 'click', mark(map, marker));
+      }
       function initialize() {
         var obj = document.getElementById('restaurants');
         var index = obj.selectedIndex;
@@ -24,62 +87,29 @@
 
         var markerTitle = "카이스트";
 
-        var centerLatlng = new google.maps.LatLng(36.370465, 127.362162);
-        var zoomLevel = 16;
-        var mapOptions = {
-          zoom: zoomLevel,
-          center: centerLatlng,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-        var map = new google.maps.Map(document.getElementById('map_view'), mapOptions);
+        var map = call_map()
+        // marker_gdorm = mgdorm(map);
+        // marker_taxi = mtaxi(map);
+        // marker_east = meast(map);
+        // show_marker(marker_taxi, map);
 
-        var gdorm_X = 36.373426;
-        var gdorm_Y = 127.356148;
-        var gdorm_Latlng = new google.maps.LatLng(gdorm_X, gdorm_Y);
-        var gdorm_Title = "여사";
-        var marker_gdorm = new google.maps.Marker({
-          position: gdorm_Latlng,
-          // map: map,
-          title: gdorm_Title
-        });
-
-        var taxi_X = 36.372825;
-        var taxi_Y = 127.359592;
-        var taxi_Latlng = new google.maps.LatLng(taxi_X, taxi_Y);
-        var taxi_Title = "택승";
-        var marker_taxi = new google.maps.Marker({
-          position: taxi_Latlng,
-          // map: map,
-          title: taxi_Title
-        });
-
-        var east_X = 36.370823;
-        var east_Y = 127.366475;
-        var east_Latlng = new google.maps.LatLng(east_X, east_Y);
-        var east_Title = "동측";
-        var marker_east = new google.maps.Marker({
-          position: east_Latlng,
-          // map: map,
-          title: east_Title
-        });
-
-        if(value == "두메") {
-          marker_taxi.setMap(map);
-          marker_east.setMap(map);
-          var delivery = new Array(marker_taxi, marker_east);
-        } else if (value == "지코바") {
-          marker_gdorm.setMap(map);
-          var delivery = new Array(marker_gdorm);
-        } else if (value == "대학생 치킨") {
-          marker_east.setMap(map);
-          var delivery = new Array(marker_east);
-        } else if (value == "맘스터치") {
-          marker_gdorm.setMap(map);
-          marker_taxi.setMap(map);
-          marker_east.setMap(map);
-          var delivery = new Array(marker_gdorm, marker_taxi, marker_east);
-        }
-        delivery.map(x => google.maps.event.addListener(x,'click', mark(map, x)));
+//        if(value == "두메") {
+//          marker_taxi.setMap(map);
+//          marker_east.setMap(map);
+//          var delivery = new Array(marker_taxi, marker_east);
+//        } else if (value == "지코바") {
+//          marker_gdorm.setMap(map);
+//          var delivery = new Array(marker_gdorm);
+//        } else if (value == "대학생 치킨") {
+//          marker_east.setMap(map);
+//          var delivery = new Array(marker_east);
+//        } else if (value == "맘스터치") {
+//          marker_gdorm.setMap(map);
+//          marker_taxi.setMap(map);
+//          marker_east.setMap(map);
+//          var delivery = new Array(marker_gdorm, marker_taxi, marker_east);
+//        }
+//        delivery.map(x => google.maps.event.addListener(x,'click', mark(map, x)));
       }
       function mark(map, marker) {
         var markerMaxWidth = 300;
@@ -100,6 +130,12 @@
           var cont = '<div>' +
           '<h2>동측</h2>' +
           '<p>동측 기숙사입니다</p>' +
+          '<a href = "https://kds.kaist.ac.kr" target = "_blank">https://kds.kaist.ac.kr</a>' +
+          '</div>';
+        } else if(marker.title == '희망') {
+          var cont = '<div>' +
+          '<h2>희망</h2>' +
+          '<p>희망관 기숙사입니다</p>' +
           '<a href = "https://kds.kaist.ac.kr" target = "_blank">https://kds.kaist.ac.kr</a>' +
           '</div>';
         }
@@ -175,9 +211,45 @@
     <script>
       jQuery('#restaurants').change(function() {
         var state = jQuery('#restaurants option:selected').val();
+        // console.log(state);
+        jQuery.ajax({
+          type:"GET",
+          url:"/delivery/restaurant?rid="+state,
+          dataType:"JSON",
+          success: function(data){
+            // console.log(data);
+            // console.log(data[0]);
+            // console.log(data[0].space);
+            map = call_map();
+            var i = 0;
+            $.each(data, function() {
+              var res_space = data[i].space;
+              // console.log(res_space);
+              if(res_space == 3){
+                show_marker(mgdorm(map), map);
+              }
+              if(res_space == 4){
+                show_marker(mtaxi(map), map);
+              }
+              if(res_space == 5){
+                show_marker(meast(map), map);
+              }
+              if(res_space == 6){
+                show_marker(mhope(map), map);
+              }
+              i = i + 1;
+            })
+            //console.log(restext);
+          },
+          complete: function(data){
+
+          },
+          error: function(xhr, status, error){
+            alert("calling spaces has " + status);
+          },
+        })
         if(state == '두메') {
           jQuery('.layer').show();
-          console.log("ㅁㅁㅁㄴ러ㅏㅈㄷ렂다르");
         } else {
           jQuery('.layer').hide();
         }
@@ -186,27 +258,32 @@
     <script>
       $(document).ready(function() {
         var $select = $('#restaurants');
-        console.log("11111");
         jQuery.ajax({
           type:"GET",
           url:"restaurant/all",
           dataType:"JSON",
           success: function(data){
+            var i = 0;
+            $.each(data, function() {
+              $select.append($('<option />', { value: data[i].idRestaruant, text: data[i].name }));
+              i = i + 1;
+            });
+            // var restext = JSON.parse(data.responseText);
+            // var i = 0;
+            // $.each(restext, function() {
+            //   // console.log(restext);
+            //   // console.log(restext[i].name);
+            //   $select.append($('<option />', { value: restext[i].idRestaruant, text: restext[i].name }));
+            //   i = i + 1;
+            // });
             // alert("What");
             // alert(data.Data[0]["Space_idSpace"]);
           },
           complete: function(data){
-            var restext = JSON.parse(data.responseText);
-            var i = 0;
-            $.each(restext, function() {
-              console.log(restext);
-              console.log(restext[i].name);
-              $select.append($('<option />', { text: restext[i].name }));
-              i = i + 1;
-            });
+
           },
           error: function(xhr, status, error){
-            alert("sid 다시 찾아봐라잉");
+            alert("calling restaurant has " + status);
           },
         });
       });
