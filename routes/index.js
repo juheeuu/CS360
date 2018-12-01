@@ -18,8 +18,10 @@ module.exports = function(app, fs, connection)
   app.get('/restaurant_signup', function(req,res){
     res.render('restaurant_signup.html')
   });
+
   app.get('/rating', function(req,res){
     res.render('rating.html')
+  });
 
   app.post('/duration_add', (req, res) =>{
     const id = req.body["id"];
