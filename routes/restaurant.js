@@ -37,6 +37,29 @@ module.exports = function(app, fs, connection){
     });
   });
 
+
+  app.put('/restaurant_modify', (req, res) =>{
+    console.log("PUT /restaurant_modify");
+    const id = req.body["id"];
+    const password = req.body["password"];
+    const name = req.body["name"];
+    const category = req.body["category"];
+    const phoneNumber = req.body["PhoneNumber"];
+    const location = req.body["location"];
+
+    const values = [name, category, phoneNumber, location, password, id];
+
+    connection.query("UPDATE Restaruant SET name=?,category=?,PhoneNumber=?,location=?,password=?  WHERE idRestaruant=?", values, function(err, rows, fields){
+      if(err){
+        console.log(err);
+        res.end("DB error_UPDATE")
+        return;
+      }else{
+        res.send({"Success" : "True"});
+      }
+    });
+  });
+
   app.get('/restaurant/all', (req, res) =>{
     console.log("GET /restaurant/all");
     connection.query("SELECT * FROM Restaruant", function(err, rows, fields){
@@ -99,7 +122,7 @@ module.exports = function(app, fs, connection){
   app.get('/rating', (req, res) =>{
     console.log("GET /rating");
     const rid = req.query.rid;
-    connection.query("SELECT stuId,Description,score FROM (Rating JOIN Restaruant) WHERE idRestaruant=?", [rid], function(err, rows, fields){
+    connection.query("SELECT stuId,Description,score FROM (Rating JOIN Restaruant ON resId = idRestaruant) WHERE idRestaruant=?", [rid], function(err, rows, fields){
       if(err){
         console.log(err);
         res.end("DB error")
