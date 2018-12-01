@@ -244,7 +244,7 @@ module.exports = function(app, fs, connection){
   app.get('/delivery/space', (req, res) =>{
     console.log("GET /delivery/space");
     const sid = req.query.sid;
-    connection.query("SELECT * FROM Duration WHERE Space_idSpace=?", [sid], function(err, rows, fields){
+    connection.query("SELECT * FROM Duration WHERE space=?", [sid], function(err, rows, fields){
       if(err){
         console.log(err);
         res.end("DB error")
