@@ -77,7 +77,8 @@ module.exports = function(app, fs, connection){
 
   app.get('/restaurant/inform', (req, res) =>{
     console.log("GET /restaurant/inform");
-    const rid = req.query.rid;
+    //const rid = req.query.rid;
+    const rid = req.session["restaurant_id"];
     connection.query("SELECT * FROM Restaruant WHERE idRestaruant=?", [rid], function(err, rows, fields){
       if(err){
         console.log(err);
