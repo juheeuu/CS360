@@ -22,6 +22,9 @@ module.exports = function(app, fs, connection)
   app.get('/rating_page', function(req,res){
     res.render('rating.html')
   });
+  app.get('/restaurant_modify', function(req,res){
+    res.render('restaurant_modify.html')
+  });
 
   app.post('/duration_add', (req, res) =>{
     const id = req.body["id"];
