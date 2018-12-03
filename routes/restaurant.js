@@ -103,6 +103,8 @@ module.exports = function(app, fs, connection){
 
 
 
+
+
   app.get('/restaurant/inform', (req, res) =>{
     console.log("GET /restaurant/inform");
     //const rid = req.query.rid;
@@ -231,6 +233,40 @@ module.exports = function(app, fs, connection){
     }else{
         res.redirect('/');
     }
+  });
+
+
+  app.get('/restaurant_unsubscribe', function(req, res){
+    const sess = req.session;
+
+    if(sess.restaurant_id == null){
+      res.send({"Success" : "False"});
+    }
+
+    connection.query("DELETE FROM Duration WHERE resID=?", [sess.restaurant_id], function(err, rows, fields){
+      if(err){
+        console.log(err);
+        res.send("DB error")
+        return;
+      }else{
+        connection.query("DELETE FROM Restaruant WHERE idRestaruant=?", [sess.restaurant_id], function(err, rows, fields){
+          if(err){
+            console.log(err);
+            res.send("DB error")
+            return;
+          }
+
+          if(rows.affectedRows == 1){
+            res.send({"Success" : "True"});
+            if(sess.restaurant_id){
+                req.session.destroy();
+            }
+          }else{
+            res.send({"Success" : "False"});
+          }
+        });
+      }
+    });
   });
 
   app.get('/restaurant/myinfo', (req, res) =>{
