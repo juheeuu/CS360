@@ -66,7 +66,7 @@ module.exports = function(app, fs, connection){
               }else{
                 var j = 3;
 
-                while(delivers.indexOf(j) < 0) j++;
+                while(delivers.indexOf(j) < 0 && j < 7) j++;
                 if(j > 6){
                   res.redirect('/')
                   return;
@@ -77,8 +77,9 @@ module.exports = function(app, fs, connection){
                     res.end("DB error_INSERT Duration")
                     return;
                   }else{
+                    console.log(j)
                     j++;
-                    while(delivers.indexOf(j) < 0) j++;
+                    while(delivers.indexOf(j) < 0 && j < 7) j++;
                     if(j > 6){
                       res.redirect('/')
                       return;
@@ -89,8 +90,9 @@ module.exports = function(app, fs, connection){
                         res.end("DB error_INSERT Duration")
                         return;
                       }else{
+                        console.log(j)
                         j++;
-                        while(delivers.indexOf(j) < 0) j++;
+                        while(delivers.indexOf(j) < 0 && j < 7) j++;
                         if(j > 6){
                           res.redirect('/')
                           return;
@@ -101,8 +103,9 @@ module.exports = function(app, fs, connection){
                             res.end("DB error_INSERT Duration")
                             return;
                           }else{
+                            console.log(j)
                             j++;
-                            while(delivers.indexOf(j) < 0) j++;
+                            while(delivers.indexOf(j) < 0 && j < 7) j++;
                             if(j > 6){
                               res.redirect('/')
                               return;
@@ -113,6 +116,7 @@ module.exports = function(app, fs, connection){
                                 res.end("DB error_INSERT Duration")
                                 return;
                               }else{
+                                console.log(j)
                                 res.redirect('/');
                                 return;
                               }
