@@ -43,6 +43,7 @@
   </head>
 <body style="margin: 0;">
     <div class="topBar">
+        <button class="button" onclick="onclickBackbutton();"> < </button>
         <div class="title" >Modify Restaurant Information </div>
       </div>
       <img src="static/KAIST.jpeg" width="100%">
@@ -105,6 +106,9 @@
                 },
             });
           });
+          const onclickBackbutton = function() {
+              location.href ="./restaurant";
+          }
       </script>
 </body>
 </html>
