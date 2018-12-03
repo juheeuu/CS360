@@ -173,8 +173,8 @@ module.exports = function(app, fs, connection){
   });
 
   app.post('/preferred/edit', (req, res) =>{
-    console.log("POST /preferred/edit");
     const id = req.session.user_id;
+    console.log("POST /preferred/edit");
     const changed = req.body.preferred;
     connection.query("UPDATE Student SET prefermenu = ? WHERE idStudent=?", [changed, id], function(err, rows, fields){
       if(err){
@@ -188,6 +188,10 @@ module.exports = function(app, fs, connection){
 
   app.post('/rating/edit', (req, res) =>{
     const id = req.session.user_id;
+    if(id == null){
+      res.redirect("/");
+      return;
+    }
     collectRequestData(req, result =>{
       console.log("POST /rating/edit");
       var rating = result.rating;
@@ -204,6 +208,10 @@ module.exports = function(app, fs, connection){
       // if(description = " "){
       //   res.send({"내용이비어있다 재영아 제대로 좀 해라":"화이팅"});
       // }
+      if(id == null || description == ""){
+        res.redirect("/rating_page");
+        return;
+      }
       const ans = [id, rid, description, rating];
       connection.query("INSERT INTO Rating (stuId, resId, Description, score) VALUES (?, ?, ?, ?)", ans, function(err, rows, fields){
         if(err){
