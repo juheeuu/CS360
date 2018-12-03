@@ -138,38 +138,33 @@ module.exports = function(app, fs, connection){
   app.post('/restaurant_modify', (req, res) =>{
     collectRequestData(req, result => {
       console.log("POST /restaurant_modify");
-
-      const name = result.name;
-      const phoneNumber = result.phoneNumber;
-      const info = result.info;
-      const category = result.category;
+      const id = req.session.restaurant_id;
 
       console.log(result);
+      const name = result.name;
+      const phoneNumber = result.PhoneNumber;
+      const category = result.category;
 
-      // var name = result.name;
-      // var phoneNumber = result.phoneNumber;
-      // var category = result.category;
+      const values = [name, category, phoneNumber, id];
+      var i = 0;
+      for(i = 0; i < values.length; i++){
+        if(values[i] == ""){
+          res.redirect("/");
+          console.log("no value!")
+          return;
+        }
+      }
+
+      connection.query("UPDATE Restaruant SET name=?, category=?, PhoneNumber=? WHERE idRestaruant=?", values, function(err, rows, fields){
+        if(err){
+          console.log(err);
+          res.end("DB error")
+          return;
+        }
+        res.redirect('/restaurant')
+      });
 
     });
-    // console.log("PUT /restaurant_modify");
-    // const id = req.body["id"];
-    // const password = req.body["password"];
-    // const name = req.body["name"];
-    // const category = req.body["category"];
-    // const phoneNumber = req.body["PhoneNumber"];
-    // const location = req.body["location"];
-
-    // const values = [name, category, phoneNumber, location, password, id];
-
-    // connection.query("UPDATE Restaruant SET name=?,category=?,PhoneNumber=?,location=?,password=?  WHERE idRestaruant=?", values, function(err, rows, fields){
-    //   if(err){
-    //     console.log(err);
-    //     res.end("DB error_UPDATE")
-    //     return;
-    //   }else{
-    //     res.send({"Success" : "True"});
-    //   }
-    // });
   });
 
   app.get('/restaurant/all', (req, res) =>{
