@@ -193,14 +193,17 @@ module.exports = function(app, fs, connection){
       var rating = result.rating;
       var description = result.description;
       var rid = result.rid;
-      console.log(rid);
+      // console.log(rid);
       // const id = "2";
       // const rid = req.query.rid;
       // console.log(rating);
       // console.log(description);
       // const score = req.body.score;
       // const content = req.body.Description;
-
+      // console.log(description);
+      // if(description = " "){
+      //   res.send({"내용이비어있다 재영아 제대로 좀 해라":"화이팅"});
+      // }
       const ans = [id, rid, description, rating];
       connection.query("INSERT INTO Rating (stuId, resId, Description, score) VALUES (?, ?, ?, ?)", ans, function(err, rows, fields){
         if(err){

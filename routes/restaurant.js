@@ -185,8 +185,13 @@ module.exports = function(app, fs, connection){
       }
 
       //const ans = {"Success" : "True", "Value" : rows[0]["AVG(EvaluationValue)"]}
-      const ans = {"Value" : rows[0]["AVG(score)"]}
-      res.send(ans);
+      if(rows[0]["AVG(score)"] == null){
+        const ans = {"Value" : rows[0]["AVG(score)"]}
+        res.send(ans)
+      }else{
+        const ans = {"Value" : rows[0]["AVG(score)"].toFixed(2)}
+        res.send(ans);
+      }
     });
   });
 
