@@ -18,40 +18,119 @@ function collectRequestData(request, callback) {
 
 module.exports = function(app, fs, connection){
   app.post('/restaurant_signup', (req, res) =>{
-    console.log("POST /restaurant_signup");
-    const id = req.body["id"];
-    const password = req.body["password"];
-    const name = req.body["name"];
-    const category = req.body["category"];
-    const phoneNumber = req.body["PhoneNumber"];
-    const location = req.body["location"];
+    collectRequestData(req, result => {
+        console.log("POST /restuarant_signup");
+        console.log(result);
 
-    const values = [id, name, category, phoneNumber, location, password];
+        const id = result.id;
+        const password = result.password;
+        const name = result.name;
+        const category = result.category;
+        const phoneNumber = result.phoneNumber;
 
-    //console.log(typeof space)
+        const delivers = []
+        if(result.girldorm == "pos") delivers.push(3);
+        if(result.taxi == "pos") delivers.push(4);
+        if(result.east == "pos") delivers.push(5);
+        if(result.hope == "pos") delivers.push(6);
 
-    connection.query("SELECT * FROM Restaruant WHERE idRestaruant=?", [id], function(err, rows, fields){
-      if(err){
-        console.log(err);
-        res.end("DB error_SELECT")
-        return;
-      }
+        const values = [id, name, category, phoneNumber, password];
+        console.log(delivers);
+        console.log(values);
 
-      if(rows.length > 0){
-        res.send({"Success" : "False", "Message" : "Already existing id"});
-        return;
-      }else{
-        //INSERT INTO `Delivery`.`Student` (`idStudent`, `Password`, `prefermenu`) VALUES ('1', '1234', '2');
-        connection.query("INSERT INTO Restaruant (idRestaruant, name, category, PhoneNumber, location, password) VALUES (?, ?, ?, ?, ?, ?)", values, function(err, rows, fields){
+        var i = 0;
+        for(i = 0; i < values.length; i++){
+          if(values[i] == ""){
+            res.redirect("/");
+            console.log("no value!")
+            return;
+          }
+        }
+
+        connection.query("SELECT * FROM Restaruant WHERE idRestaruant=?", [id], function(err, rows, fields){
           if(err){
             console.log(err);
-            res.end("DB error_INSERT")
+            res.end("DB error_SELECT")
+            return;
+          }
+
+          if(rows.length > 0){
+            res.send({"Success" : "False", "Message" : "Already existing id"});
             return;
           }else{
-            res.send({"Success" : "True"});
+            connection.query("INSERT INTO Restaruant (idRestaruant, name, category, PhoneNumber, password) VALUES (?, ?, ?, ?, ?)", values, function(err, rows, fields){
+              if(err){
+                console.log(err);
+                res.end("DB error_INSERT")
+                return;
+              }else{
+                var j = 3;
+
+                while(delivers.indexOf(j) < 0 && j < 7) j++;
+                if(j > 6){
+                  res.redirect('/')
+                  return;
+                }
+                connection.query("INSERT INTO Duration (space, resID) VALUES (?, ?)", [j, id], function(err, rows, fields){
+                  if(err){
+                    console.log(err);
+                    res.end("DB error_INSERT Duration")
+                    return;
+                  }else{
+                    console.log(j)
+                    j++;
+                    while(delivers.indexOf(j) < 0 && j < 7) j++;
+                    if(j > 6){
+                      res.redirect('/')
+                      return;
+                    }
+                    connection.query("INSERT INTO Duration (space, resID) VALUES (?, ?)", [j, id], function(err, rows, fields){
+                      if(err){
+                        console.log(err);
+                        res.end("DB error_INSERT Duration")
+                        return;
+                      }else{
+                        console.log(j)
+                        j++;
+                        while(delivers.indexOf(j) < 0 && j < 7) j++;
+                        if(j > 6){
+                          res.redirect('/')
+                          return;
+                        }
+                        connection.query("INSERT INTO Duration (space, resID) VALUES (?, ?)", [j, id], function(err, rows, fields){
+                          if(err){
+                            console.log(err);
+                            res.end("DB error_INSERT Duration")
+                            return;
+                          }else{
+                            console.log(j)
+                            j++;
+                            while(delivers.indexOf(j) < 0 && j < 7) j++;
+                            if(j > 6){
+                              res.redirect('/')
+                              return;
+                            }
+                            connection.query("INSERT INTO Duration (space, resID) VALUES (?, ?)", [j, id], function(err, rows, fields){
+                              if(err){
+                                console.log(err);
+                                res.end("DB error_INSERT Duration")
+                                return;
+                              }else{
+                                console.log(j)
+                                res.redirect('/');
+                                return;
+                              }
+                            });
+                          }
+                        });
+                      }
+                    });
+                  }
+                });
+              }
+            });
           }
         });
-      }
     });
   });
 
@@ -59,6 +138,11 @@ module.exports = function(app, fs, connection){
   app.post('/restaurant_modify', (req, res) =>{
     collectRequestData(req, result => {
       console.log("POST /restaurant_modify");
+
+      const name = result.name;
+      const phoneNumber = result.phoneNumber;
+      const info = result.info;
+      const category = result.category;
 
       console.log(result);
 
@@ -249,20 +333,28 @@ module.exports = function(app, fs, connection){
         res.send("DB error")
         return;
       }else{
-        connection.query("DELETE FROM Restaruant WHERE idRestaruant=?", [sess.restaurant_id], function(err, rows, fields){
+        connection.query("DELETE FROM Menu WHERE resID=?", [sess.restaurant_id], function(err, rows, fields){
           if(err){
             console.log(err);
             res.send("DB error")
             return;
-          }
-
-          if(rows.affectedRows == 1){
-            res.send({"Success" : "True"});
-            if(sess.restaurant_id){
-                req.session.destroy();
-            }
           }else{
-            res.send({"Success" : "False"});
+            connection.query("DELETE FROM Restaruant WHERE idRestaruant=?", [sess.restaurant_id], function(err, rows, fields){
+              if(err){
+                console.log(err);
+                res.send("DB error")
+                return;
+              }
+
+              if(rows.affectedRows == 1){
+                res.send({"Success" : "True"});
+                if(sess.restaurant_id){
+                    req.session.destroy();
+                }
+              }else{
+                res.send({"Success" : "False"});
+              }
+            });
           }
         });
       }

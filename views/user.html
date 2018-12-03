@@ -243,7 +243,7 @@
       <button id= "toggle1" class="button" onclick="onclickToggleButton(1)" > All Menus </button>
       <button id="toggle2" class="initialDisabledButton" onclick="onclickToggleButton(2)" > Prefer Menu </button>
       <div class="title" > KAIST Delivery Services! </div>
-      <button class="button" > Logout </button>
+      <button class="button" onclick="onclickLogoutButton();"> Logout </button>
     </div>
     <div class = "root">
       <div class = "content">
@@ -359,6 +359,22 @@
           },
         });
       });
+      onclickLogoutButton = function() {
+        jQuery.ajax({
+          type:"GET",
+          url: "student_logout",
+          success: function(data) {
+
+          },
+          complete: function(data) {
+
+          },
+          error: function(xhr, status, error) {
+            alsert("logout error" + status)
+          },
+        });
+        location.href="/";
+      }
     </script>
   </body>
 </html>
