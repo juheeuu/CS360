@@ -72,8 +72,9 @@
             <tr>
                 <td colspan="2">
                     <div class="buttonWrapper">
-                        <button class="button" id="signin_button" onclick="modify_res_info();">Modify information</button>
+                        <button class="button" id="signin_button" onclick="redirect_modify_res_info();">Modify information</button>
                         <button class="button" id="signin_button" onclick="redirect_rating();">See my Rating</button>
+                        <button class="button" id="signin_button" onclick="membership_withdrawal();">Membership Withdrawal</button>
                     </div>
                 </td>
             </tr>
@@ -100,11 +101,25 @@
                 },
             });
           });
-          const modify_res_info = function() {
+          const redirect_modify_res_info = function() {
             location.href="/restaurant_modify"
           }
           const redirect_rating = function(){
             location.href="/rating_restaurant"
+          }
+          const membership_withdrawal = function() {
+            jQuery.ajax({
+                type:"GET",
+                url:'/restaurant_unsubscribe',
+                success: function(data){
+                    location.href="/"
+                },
+                complete: function(data){
+                },
+                error: function(xhr, status, error){
+                    alert("cannot withdrawal membership");
+                },
+            });
           }
       </script>
 </body>
