@@ -208,7 +208,8 @@ module.exports = function(app, fs, connection){
           res.end("DB error")
           return;
         }
-        res.send({"Success" : "True"});
+        // res.send({"Success" : "True"});
+        res.redirect('/rating_page')
       });
     });
   });
