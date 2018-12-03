@@ -45,7 +45,8 @@
     <div class="topBar">
         <button class="button" onclick="onclickBackbutton();"> < </button>
         <div class="title" >Modify Restaurant Information </div>
-      </div>
+        <button class="button" onclick="onclickLogoutButton();"> Logout </button>
+    </div>
       <img src="static/KAIST.jpeg" width="100%">
       <form action="restaurant_modify" method="POST" id = "rest_modify_form">
       <table class="blueTable">
@@ -105,6 +106,22 @@
           const onclickBackbutton = function() {
               location.href ="./restaurant";
           }
+          const onclickLogoutButton = function() {
+            jQuery.ajax({
+            type:"GET",
+            url: "restaurant_logout",
+            success: function(data) {
+
+            },
+            complete: function(data) {
+
+            },
+            error: function(xhr, status, error) {
+                alsert("logout error" + status)
+            },
+            });
+            location.href="/";
+        }
       </script>
 </body>
 </html>

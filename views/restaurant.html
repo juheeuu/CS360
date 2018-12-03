@@ -44,6 +44,7 @@
 <body style="margin: 0;">
     <div class="topBar">
         <div class="title" >Restaurant Information </div>
+        <button class="button" onclick="onclickLogoutButton();"> Logout </button>
       </div>
       <img src="static/KAIST.jpeg" width="100%">
 
@@ -116,6 +117,22 @@
                 },
             });
           }
+          const onclickLogoutButton = function() {
+            jQuery.ajax({
+            type:"GET",
+            url: "restaurant_logout",
+            success: function(data) {
+
+            },
+            complete: function(data) {
+
+            },
+            error: function(xhr, status, error) {
+                alsert("logout error" + status)
+            },
+            });
+            location.href="/";
+        }
       </script>
 </body>
 </html>
