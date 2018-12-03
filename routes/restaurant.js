@@ -62,9 +62,9 @@ module.exports = function(app, fs, connection){
 
       console.log(result);
 
-      var name = result.name;
-      var phoneNumber = result.phoneNumber;
-      var category = result.category;
+      // var name = result.name;
+      // var phoneNumber = result.phoneNumber;
+      // var category = result.category;
 
     });
     // console.log("PUT /restaurant_modify");
