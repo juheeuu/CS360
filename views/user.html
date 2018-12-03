@@ -130,6 +130,7 @@
           success: function(data){
             if(data == ""){
               document.getElementById("res_menu").innerHTML = "메뉴가 없습니다";
+              jQuery('.layer').hide();
             }else {
               document.getElementById("res_menu").innerHTML = "메뉴";
               var i = 0;
@@ -173,11 +174,11 @@
         var toggle1 = document.getElementById('toggle1');
         var toggle2 = document.getElementById('toggle2')
         if (buttonNum==1) {
-            toggle1.style.background="-webkit-linear-gradient(top, #65a9d7, #59C2BC)";
+            toggle1.style.background="-webkit-linear-gradient(top, #59C2BC, #59C2BC)";
             toggle2.style.background="grey";
             showAllMenus();
         } else if (buttonNum == 2) {
-          toggle2.style.background="-webkit-linear-gradient(top, #65a9d7, #59C2BC)";
+          toggle2.style.background="-webkit-linear-gradient(top, #59C2BC, #59C2BC)";
           toggle1.style.background="grey";
           showPreferMenu();
         }
@@ -271,6 +272,25 @@
         // console.log(state);
         jQuery.ajax({
           type:"GET",
+          url:"/rating/avg_value?rid="+rid,
+          dataType:"JSON",
+          success: function(data){
+            var i = 0;
+            console.log(data.Value)
+            if(data.Value == null){
+              document.getElementById('avg_rating').innerHTML = "재영이가 아직 아무것도 안넣었어요 나쁜놈이에요";
+            }else{
+              document.getElementById('avg_rating').innerHTML = "평점 : "+data.Value+"/5";
+            }
+          },
+          complete: function(data){
+          },
+          error: function(data){
+            alert("calling rating has " + status);
+          },
+        });
+        jQuery.ajax({
+          type:"GET",
           url:"/delivery/restaurant?rid="+rid,
           dataType:"JSON",
           success: function(data){
@@ -305,25 +325,6 @@
           },
           error: function(xhr, status, error){
             alert("calling spaces has " + status);
-          },
-        });
-        jQuery.ajax({
-          type:"GET",
-          url:"/rating/avg_value?rid="+rid,
-          dataType:"JSON",
-          success: function(data){
-            var i = 0;
-            console.log(data.Value)
-            if(data.Value == null){
-              document.getElementById('avg_rating').innerHTML = "재영이가 아직 아무것도 안넣었어요 나쁜놈이에요";
-            }else{
-              document.getElementById('avg_rating').innerHTML = "평점 : "+data.Value+"/5";
-            }
-          },
-          complete: function(data){
-          },
-          error: function(data){
-            alert("calling rating has " + status);
           },
         });
       });

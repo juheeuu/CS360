@@ -43,10 +43,11 @@
   </head>
 <body style="margin: 0;">
     <div class="topBar">
+        <button class="button" onclick="onclickBackbutton();"> < </button>
         <div class="title" >Modify Restaurant Information </div>
       </div>
       <img src="static/KAIST.jpeg" width="100%">
-      <form action="restaurant_modify" method="POST" id = "restaurant_modify_form">
+      <form action="restaurant_modify" method="POST" id = "rest_modify_form">
       <table class="blueTable">
           <tr>
               <td class="classify"> ID </td>
@@ -58,16 +59,27 @@
         </tr>
           <tr>
             <td class="classify"> PhoneNumber </td>
-            <td> <input id="PhoneNumber"></p> </td>
+            <td> <input id="PhoneNumber" name="PhoneNumber"> </td>
           </tr>
           <tr>
+                <td class="classify"> Information </td>
+                <td> <input id="inform" name="information"> </td>
+              </tr>
+          <tr>
               <td class="classify"> Category </td>
-              <td> <input id="category"> </td>
+              <td> 
+                  <select style="width: 300px" name="category" id="category">
+                    <option value="hamburger">hamburger</option>
+                    <option value="chicken">chicken</option>
+                    <option value="pork">pork</option>
+                    <option value="fish">raw fish</option>
+                  </select>
+                </td>
           </tr>
             <tr>
                 <td colspan="2">
                     <div class="buttonWrapper">
-                        <button type="submit" form="restaurant_modify_form" class="button" id="signin_button">Submit</button>
+                        <button type="submit" form="rest_modify_form" class="button" id="signin_button">Submit</button>
                     </div>
                 </td>
             </tr>
@@ -84,8 +96,7 @@
                     $("#name").val(data.name);
                     $("#PhoneNumber").val(data.PhoneNumber);
                     $("#inform").val(data.inform);
-                    $("#location").val(data.location);
-                    $("#category").val(data.category);
+                    $('#category').val(data.category).prop('selected', true);
                 },
                 complete: function(data){
 
@@ -95,6 +106,9 @@
                 },
             });
           });
+          const onclickBackbutton = function() {
+              location.href ="./restaurant";
+          }
       </script>
 </body>
 </html>

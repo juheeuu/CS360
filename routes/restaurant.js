@@ -135,11 +135,16 @@ module.exports = function(app, fs, connection){
     collectRequestData(req, result => {
       console.log("POST /restaurant_modify");
 
+      const name = result.name;
+      const phoneNumber = result.phoneNumber;
+      const info = result.info;
+      const category = result.category;
+
       console.log(result);
 
-      var name = result.name;
-      var phoneNumber = result.phoneNumber;
-      var category = result.category;
+      // var name = result.name;
+      // var phoneNumber = result.phoneNumber;
+      // var category = result.category;
 
     });
     // console.log("PUT /restaurant_modify");

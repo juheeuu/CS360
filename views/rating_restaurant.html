@@ -61,6 +61,7 @@
   </head>
   <body style="margin: 0;">
     <div class="topBar">
+        <button class="button" onclick="goback();" > < </button>
         <div class="title" > Rating </div>
         <button class="button" > Logout </button>
     </div>
@@ -147,6 +148,10 @@
         cell3.colSpan = "2";
         body.appendChild(tables[size]);
       };
+
+      const goback = function() {
+        location.href="/restaurant";
+      }
 
     </script>
   </body>
