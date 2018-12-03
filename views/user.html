@@ -254,9 +254,9 @@
           <p id = "res_menu">메뉴</p>
           <table id="myTable" cellpadding="2" cellspacing="2" onclick="tester()"></table>
           <div class = "linking">
-            <a href="javascript:see_rating();" id = "see_rating" class="button2" target="_blank">평가보기</a>
-            <!-- <a href="/rating_page" id = "see_rating" class="button2" target="_blank">평가보기</a> -->
+            <a href="javascript:see_rating();" id = "see_rating" class="button2" target="_blank">평가보기</a>            <!-- <a href="/rating_page" id = "see_rating" class="button2" target="_blank">평가보기</a> -->
           </div>
+          <p id = 'avg_rating'></p>
         </div>
         <div id = "map_view">
         </div>
@@ -306,7 +306,26 @@
           error: function(xhr, status, error){
             alert("calling spaces has " + status);
           },
-        })
+        });
+        jQuery.ajax({
+          type:"GET",
+          url:"/rating/avg_value?rid="+rid,
+          dataType:"JSON",
+          success: function(data){
+            var i = 0;
+            console.log(data.Value)
+            if(data.Value == null){
+              document.getElementById('avg_rating').innerHTML = "재영이가 아직 아무것도 안넣었어요 나쁜놈이에요";
+            }else{
+              document.getElementById('avg_rating').innerHTML = "평점 : "+data.Value+"/5";
+            }
+          },
+          complete: function(data){
+          },
+          error: function(data){
+            alert("calling rating has " + status);
+          },
+        });
       });
       $(document).ready(function() {
         var $select = $('#restaurants');
