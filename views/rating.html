@@ -64,7 +64,7 @@
     <div class="topBar">
         <button class="button" onclick="onclickBackbutton();"> < </button>
         <div class="title" > Rating </div>
-        <button class="button" > Logout </button>
+        <button class="button" onclick="onclickLogoutButton();"> Logout </button>
     </div>
     <div class="mainPhrase">
         👏 Would you like to rate the restaurant? 👏
@@ -154,6 +154,22 @@
       };
       const onclickBackbutton = function () {
         location.href = "/user";
+      }
+      const onclickLogoutButton = function() {
+        jQuery.ajax({
+          type:"GET",
+          url: "student_logout",
+          success: function(data) {
+
+          },
+          complete: function(data) {
+
+          },
+          error: function(xhr, status, error) {
+            alsert("logout error" + status)
+          },
+        });
+        location.href="/";
       }
     </script>
   </body>
