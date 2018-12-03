@@ -15,6 +15,7 @@ function collectRequestData(request, callback) {
         callback(null);
     }
 }
+
 module.exports = function(app, fs, connection){
   app.post('/student_signup', (req, res) =>{
     collectRequestData(req, result => {
@@ -98,7 +99,7 @@ module.exports = function(app, fs, connection){
   app.get('/student_unsubscribe', function(req, res){
     const sess = req.session;
 
-    connection.query("DELETE FROM Student WHERE idStudent=?", [3], function(err, rows, fields){
+    connection.query("DELETE FROM Student WHERE idStudent=?", [sess.user_id], function(err, rows, fields){
       if(err){
         console.log(err);
         res.send("DB error")
@@ -107,7 +108,7 @@ module.exports = function(app, fs, connection){
 
       if(rows.affectedRows == 1){
         res.send({"Success" : "True"});
-        if(sess.id){
+        if(sess.user_id){
             req.session.destroy();
         }
       }else{
