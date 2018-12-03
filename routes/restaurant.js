@@ -1,3 +1,21 @@
+const http = require('http');
+const { parse } = require('querystring');
+function collectRequestData(request, callback) {
+    const FORM_URLENCODED = 'application/x-www-form-urlencoded';
+    if(request.headers['content-type'] === FORM_URLENCODED) {
+        let body = '';
+        request.on('data', chunk => {
+            body += chunk.toString();
+        });
+        request.on('end', () => {
+            callback(parse(body));
+        });
+    }
+    else {
+        callback(null);
+    }
+}
+
 module.exports = function(app, fs, connection){
   app.post('/restaurant_signup', (req, res) =>{
     console.log("POST /restaurant_signup");
@@ -38,26 +56,36 @@ module.exports = function(app, fs, connection){
   });
 
 
-  app.put('/restaurant_modify', (req, res) =>{
-    console.log("PUT /restaurant_modify");
-    const id = req.body["id"];
-    const password = req.body["password"];
-    const name = req.body["name"];
-    const category = req.body["category"];
-    const phoneNumber = req.body["PhoneNumber"];
-    const location = req.body["location"];
+  app.post('/restaurant_modify', (req, res) =>{
+    collectRequestData(req, result => {
+      console.log("POST /restaurant_modify");
 
-    const values = [name, category, phoneNumber, location, password, id];
+      console.log(result);
 
-    connection.query("UPDATE Restaruant SET name=?,category=?,PhoneNumber=?,location=?,password=?  WHERE idRestaruant=?", values, function(err, rows, fields){
-      if(err){
-        console.log(err);
-        res.end("DB error_UPDATE")
-        return;
-      }else{
-        res.send({"Success" : "True"});
-      }
+      var name = result.name;
+      var phoneNumber = result.phoneNumber;
+      var category = result.category;
+
     });
+    // console.log("PUT /restaurant_modify");
+    // const id = req.body["id"];
+    // const password = req.body["password"];
+    // const name = req.body["name"];
+    // const category = req.body["category"];
+    // const phoneNumber = req.body["PhoneNumber"];
+    // const location = req.body["location"];
+
+    // const values = [name, category, phoneNumber, location, password, id];
+
+    // connection.query("UPDATE Restaruant SET name=?,category=?,PhoneNumber=?,location=?,password=?  WHERE idRestaruant=?", values, function(err, rows, fields){
+    //   if(err){
+    //     console.log(err);
+    //     res.end("DB error_UPDATE")
+    //     return;
+    //   }else{
+    //     res.send({"Success" : "True"});
+    //   }
+    // });
   });
 
   app.get('/restaurant/all', (req, res) =>{

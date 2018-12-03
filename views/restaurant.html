@@ -64,10 +64,6 @@
                 <td class="classify"> Information </td>
                 <td> <p id="inform"></p> </td>
               </tr>
-          <tr>
-                <td class="classify"> Location </td>
-                <td> <p id="location"> </p></td>
-              </tr>
 
           <tr>
               <td class="classify"> Category </td>
@@ -93,7 +89,6 @@
                     $("#name").text(data.name);
                     $("#PhoneNumber").text(data.PhoneNumber);
                     $("#inform").text(data.inform);
-                    $("#location").text(data.location);
                     $("#category").text(data.category);
                     localStorage.setItem("rid", data.idRestaruant);
                 },

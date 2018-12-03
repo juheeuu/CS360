@@ -43,10 +43,10 @@
   </head>
 <body style="margin: 0;">
     <div class="topBar">
-        <div class="title" >Restaurant Information </div>
+        <div class="title" >Modify Restaurant Information </div>
       </div>
       <img src="static/KAIST.jpeg" width="100%">
-
+      <form action="restaurant_modify" method="POST" id = "restaurant_modify_form">
       <table class="blueTable">
           <tr>
               <td class="classify"> ID </td>
@@ -61,26 +61,18 @@
             <td> <input id="PhoneNumber"></p> </td>
           </tr>
           <tr>
-                <td class="classify"> Information </td>
-                <td> <input id="inform"></p> </td>
-              </tr>
-          <tr>
-                <td class="classify"> Location </td>
-                <td> <input id="location"> </p></td>
-              </tr>
-
-          <tr>
               <td class="classify"> Category </td>
               <td> <input id="category"> </td>
           </tr>
             <tr>
                 <td colspan="2">
                     <div class="buttonWrapper">
-                        <button class="button" id="signin_button" >Submit</button>
+                        <button type="submit" form="restaurant_modify_form" class="button" id="signin_button">Submit</button>
                     </div>
                 </td>
             </tr>
       </table>
+      </form>
       <script>
           $(document).ready(function() {
             jQuery.ajax({
