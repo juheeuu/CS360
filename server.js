@@ -30,3 +30,6 @@ var router = require('./routes/index')(app, fs, connection)
 const server = app.listen(3000, () => {
   console.log("server is running at ssal.sparcs.org:??:3000")
 })
+process.on('uncaughtException', function (err) {
+  console.log(err);
+}); 
