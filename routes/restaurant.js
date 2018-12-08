@@ -322,32 +322,40 @@ module.exports = function(app, fs, connection){
       res.send({"Success" : "False"});
     }
 
-    connection.query("DELETE FROM Duration WHERE resID=?", [sess.restaurant_id], function(err, rows, fields){
+    connection.query("DELETE FROM Rating WHERE resID=?", [sess.restaurant_id], function(err, rows, fields){
       if(err){
         console.log(err);
         res.send("DB error")
         return;
       }else{
-        connection.query("DELETE FROM Menu WHERE resID=?", [sess.restaurant_id], function(err, rows, fields){
+        connection.query("DELETE FROM Duration WHERE resID=?", [sess.restaurant_id], function(err, rows, fields){
           if(err){
             console.log(err);
             res.send("DB error")
             return;
           }else{
-            connection.query("DELETE FROM Restaruant WHERE idRestaruant=?", [sess.restaurant_id], function(err, rows, fields){
+            connection.query("DELETE FROM Menu WHERE resID=?", [sess.restaurant_id], function(err, rows, fields){
               if(err){
                 console.log(err);
                 res.send("DB error")
                 return;
-              }
-
-              if(rows.affectedRows == 1){
-                res.send({"Success" : "True"});
-                if(sess.restaurant_id){
-                    req.session.destroy();
-                }
               }else{
-                res.send({"Success" : "False"});
+                connection.query("DELETE FROM Restaruant WHERE idRestaruant=?", [sess.restaurant_id], function(err, rows, fields){
+                  if(err){
+                    console.log(err);
+                    res.send("DB error")
+                    return;
+                  }
+
+                  if(rows.affectedRows == 1){
+                    res.send({"Success" : "True"});
+                    if(sess.restaurant_id){
+                        req.session.destroy();
+                    }
+                  }else{
+                    res.send({"Success" : "False"});
+                  }
+                });
               }
             });
           }
